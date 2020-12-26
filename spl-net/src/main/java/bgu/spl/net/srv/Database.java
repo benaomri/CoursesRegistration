@@ -62,15 +62,15 @@ public class Database {
 
         return true;
     }
-    private void register(String name,String password){
+    public void register(String name,String password){
         registerMapStudent.putIfAbsent(name,password);
     }
-    private String getPassword(String name) throws Exception {
+    public String getPassword(String name) throws Exception {
         if (!(checkIfRegister(name)))
             throw new Exception(name+"is not register");
         return registerMapStudent.get(name);
     }
-    private boolean checkIfRegister(String name){
+    public boolean checkIfRegister(String name){
         return registerMapStudent.containsKey(name);
     }
 
