@@ -4,35 +4,36 @@ import bgu.spl.net.api.MessagingProtocol;
 import bgu.spl.net.srv.Database;
 
 public class MessagingProtocolImpl implements MessagingProtocol {
-    private boolean shouldTerminate=false;
+    private boolean shouldTerminate = false;
+
     @Override
-    public Object process(Message msg) {
-        switch (msg.getMessageName()){
+    public Message process( Message msg) {
+        switch (msg.getMessageName()) {
             case ("ADMINREG"):
                 if (Database.getInstance().checkIfRegister(msg.getUserName()))
                     return errorMsg();
                 Database.getInstance().register(msg.getUserName(), msg.getUserPassword());
                 return aplliedMsg(msg);
-                break;
+            break;
             case ("STUDENTREG"):
                 if (Database.getInstance().checkIfRegister(msg.getUserName()))
                     return errorMsg();
                 Database.getInstance().register(msg.getUserName(), msg.getUserPassword());
                 return aplliedMsg(msg);
-                break;
-            case("LOGIN"):
+            break;
+            case ("LOGIN"):
                 break;
             case ("LOGOUT"):
                 break;
             case ("COURSEREG"):
                 break;
-            case("KDAMCHECK"):
+            case ("KDAMCHECK"):
                 break;
-            case("COURSESTAT"):
+            case ("COURSESTAT"):
                 break;
-            case("STUDENTSTAT"):
+            case ("STUDENTSTAT"):
                 break;
-            case("ISREGISTERED"):
+            case ("ISREGISTERED"):
                 break;
             case ("UNREGISTER"):
                 break;
@@ -42,6 +43,8 @@ public class MessagingProtocolImpl implements MessagingProtocol {
         }
 
     }
+
+
 
     @Override
     public boolean shouldTerminate() {
