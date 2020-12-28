@@ -5,6 +5,7 @@ public class Message {
     private String userName;
     private String userPassword;
 
+
     public Message(String messageName,String userName,String userPassword){
         this.messageName=messageName;
         this.userName=userName;
@@ -29,6 +30,7 @@ public class Message {
     public String getUserPassword() {
         return userPassword;
     }
+    public String getCourseNum(){return "2";}
 
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
