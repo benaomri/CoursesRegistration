@@ -3,24 +3,22 @@ package bgu.spl.net.impl.echo;
 import bgu.spl.net.api.MessagingProtocol;
 import bgu.spl.net.srv.Database;
 
-public class MessagingProtocolImpl implements MessagingProtocol {
+public class MessagingProtocolImpl implements MessagingProtocol<Message> {
     private boolean shouldTerminate = false;
 
     @Override
     public Message process( Message msg) {
-        switch (msg.getMessageName()) {
+        switch (msg.getMessageType()) {
             case ("ADMINREG"):
-                if (Database.getInstance().checkIfRegister(msg.getUserName()))
+                if (Database.getInstance().checkIfRegister(msg.getFirstData()))
                     return errorMsg();
-                Database.getInstance().register(msg.getUserName(), msg.getUserPassword());
+                Database.getInstance().register(msg.getFirstData(), msg.getSecondData());
                 return aplliedMsg(msg);
-            break;
             case ("STUDENTREG"):
-                if (Database.getInstance().checkIfRegister(msg.getUserName()))
+                if (Database.getInstance().checkIfRegister(msg.getFirstData()))
                     return errorMsg();
-                Database.getInstance().register(msg.getUserName(), msg.getUserPassword());
+                Database.getInstance().register(msg.getFirstData(), msg.getSecondData());
                 return aplliedMsg(msg);
-            break;
             case ("LOGIN"):
                 break;
             case ("LOGOUT"):
@@ -41,7 +39,7 @@ public class MessagingProtocolImpl implements MessagingProtocol {
                 break;
 
         }
-
+     return null;
     }
 
 
@@ -51,7 +49,7 @@ public class MessagingProtocolImpl implements MessagingProtocol {
         return shouldTerminate;
     }
     public Message aplliedMsg(Message msg){
-        return new Message("AKC",msg.getUserName(),msg.getUserPassword());
+        return new Message("AKC",msg.getFirstData(),msg.getSecondData());
     }
     public Message errorMsg(){
         return new Message("ERROR",null,null);
