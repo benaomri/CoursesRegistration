@@ -26,29 +26,29 @@ public class MessagingProtocolAdminImpl implements MessagingProtocol<Message> {
                 if(Database.getInstance().checkIfcourseExist(msg.getCourseNum()))
                     return errorMsg();
                 return aplliedMsg(msg);//todo: ack retunrn course stat
-                break;
+
             case ("STUDENTSTAT"):
                 if (!Database.getInstance().isLogin(msg.getUserName()))
                     return errorMsg();
                 return aplliedMsg(msg);//todo:ack return student Stat
-                break;
+
             case ("ISREGISTERED"):
                 if ((checkLogin(msg.getUserName()))||(checkCourseExist(msg.getCourseNum())))
                     return errorMsg();
                 return aplliedMsg(msg);//todo: ack return reg status
-                break;
+
             case ("UNREGISTER"):
                 if(checkLogin(msg.getUserName()))
                 if(Database.getInstance().checkRegStudentToCourse(msg.getUserName(), msg.getCourseNum()))
                     return aplliedMsg(msg);
                 return errorMsg();
 
-                break;
+
             case ("MYCOURSES"):
                 if (!checkLogin(msg.getUserName()))
                     return errorMsg();
                 return aplliedMsg(msg);
-                break;
+
 
         }
         return errorMsg();

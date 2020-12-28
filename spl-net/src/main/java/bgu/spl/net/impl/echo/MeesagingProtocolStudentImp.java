@@ -4,9 +4,8 @@ import bgu.spl.net.api.MessagingProtocol;
 import bgu.spl.net.srv.Database;
 
 public class MeesagingProtocolStudentImp implements MessagingProtocol<Message> {
-    @Override
 
-        private boolean shouldTerminate = false;
+    private boolean shouldTerminate = false;
 
         @Override
         public Message process( Message msg) {
@@ -16,7 +15,7 @@ public class MeesagingProtocolStudentImp implements MessagingProtocol<Message> {
                         return errorMsg();
                     Database.getInstance().register(msg.getUserName(), msg.getUserPassword());
                     return aplliedMsg(msg);
-                break;
+
                 case ("LOGIN"):
                     if(!Database.getInstance().checkIfRegister(msg.getUserName()))
                         return errorMsg();
@@ -30,7 +29,7 @@ public class MeesagingProtocolStudentImp implements MessagingProtocol<Message> {
                         return errorMsg();
                     Database.getInstance().logout(msg.getUserName());
                     return aplliedMsg(msg);
-                    break;
+
                 case ("COURSEREG"):
                     if(!Database.getInstance().checkIfPossibleToReg(msg.getCourseNum(), msg.getUserName()))
                         return errorMsg();
@@ -38,10 +37,10 @@ public class MeesagingProtocolStudentImp implements MessagingProtocol<Message> {
                     Database.getInstance().updateLeftCourse(msg.getCourseNum());
                     return aplliedMsg(msg);
 
-                    break;
+
                 case ("KDAMCHECK"):
                     return aplliedMsg(msg);//todo:the ack should return kdam coursus
-                    break;
+
 
                 case ("ISREGISTERED"):
                     break;
@@ -51,6 +50,7 @@ public class MeesagingProtocolStudentImp implements MessagingProtocol<Message> {
                     break;
 
             }
+            return errorMsg();
 
         }
 
