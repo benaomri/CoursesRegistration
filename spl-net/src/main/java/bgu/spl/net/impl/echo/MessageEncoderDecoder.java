@@ -2,6 +2,7 @@ package bgu.spl.net.impl.echo;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Vector;
 
 public class MessageEncoderDecoder implements bgu.spl.net.api.MessageEncoderDecoder<Message> {
     private byte[] bytes = new byte[1 << 10]; //start with 1k
@@ -16,7 +17,7 @@ public class MessageEncoderDecoder implements bgu.spl.net.api.MessageEncoderDeco
      */
     @Override
     public Message decodeNextByte(byte nextByte) {
-        if (nextByte == '\n') {
+        if (nextByte == '\0') {
             return popString();
         }
 
@@ -46,10 +47,31 @@ public class MessageEncoderDecoder implements bgu.spl.net.api.MessageEncoderDeco
     private Message popString() {
         //notice that we explicitly requesting that the string will be decoded from UTF-8
         //this is not actually required as it is the default encoding in java.
-        Message outMessage;
-        String OPCODE = new String(bytes, 0, 4, StandardCharsets.UTF_8);
+        String result = new String(bytes, 0, len, StandardCharsets.UTF_8);
+        String OPCODE=result.substring(0,5);
+        Vector<String> data=stringToVec(result);
 
         len = 0;
-        return result;
+        return new Message(OPCODE,data);
+
+    }
+    private Vector<String> stringToVec(String str)
+    {
+        Vector<String> data=new Vector<>();
+        int index=6;
+        String name="";
+        while(index<str.length()) {
+            if(str.charAt(index)==' ') {
+                data.add(name);
+                name="";
+            }
+            else {
+                name = name + str.charAt(index);
+            }
+            index++;
+        }
+        data.add(name);
+        return data;
+
     }
 }

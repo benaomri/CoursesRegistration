@@ -1,4 +1,7 @@
 package bgu.spl.net.impl.echo;
+
+import java.util.Vector;
+
 /**
  * This Class Extents Message
  *
@@ -10,28 +13,24 @@ public class MessageACK extends Message {
     String ACKopCode;
     String opCodeOptional;
 
-    public MessageACK(String messageType,String userName,String ACKopCode)
+    public MessageACK(String messageType, Vector<String> data)
     {
+        super(messageType,data);
         this.messageType=messageType;
-        this.userName=userName;
-        this.ACKopCode=ACKopCode;
-        this.opCodeOptional=null;
+        this.ACKopCode=data.elementAt(0);
+        if (data.size()==1)
+         this.opCodeOptional=null;
+        else
+            this.opCodeOptional=data.elementAt(1);
     }
-    public MessageACK(String messageType,String userName,String ACKopCode,String optional)
-    {
-        this.messageType=messageType;
-        this.userName=userName;
-        this.ACKopCode=ACKopCode;
-        this.opCodeOptional=null;
-        this.opCodeOptional=optional;
-    }
+
 
     @Override
     public String toString() {
         if (opCodeOptional!=null)
-            return messageType+userName+ACKopCode+opCodeOptional;
+            return messageType+ACKopCode+opCodeOptional;
         else
-            return messageType+userName+ACKopCode;
+            return messageType+ACKopCode;
 
 
     }

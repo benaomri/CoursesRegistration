@@ -1,17 +1,23 @@
 package bgu.spl.net.srv;
 
-import java.awt.*;
+
+import java.util.Vector;
 
 public class courseInfo {
     String courseNum;
     String courseName;
-    List KdamCoursesList;
+    Vector<String> KdamCoursesList;
     int numOfMaxStudents;
-   public courseInfo(String courseNum,String courseName,List kdamCoursesList,int numOfMaxStudents){
+    int numOfLeftSeats;
+    Vector<String> studentsRegToCourse;
+
+   public courseInfo(String courseNum,String courseName,Vector<String> kdamCoursesList,int numOfMaxStudents){
        this.courseNum=courseNum;
        this.courseName=courseName;
        this.KdamCoursesList=kdamCoursesList;
        this.numOfMaxStudents=numOfMaxStudents;
+       numOfLeftSeats=numOfMaxStudents;
+
    }
     public String getCourseNum(){
         return courseNum;
@@ -22,7 +28,7 @@ public class courseInfo {
     public int getNumOfMaxStudents(){
         return numOfMaxStudents;
     }
-    public List getKdamCorseList() {
+    public Vector<String> getKdamCorseList() {
         return KdamCoursesList;
     }
 

@@ -1,12 +1,13 @@
 package bgu.spl.net.srv;
 
 import java.awt.*;
+import java.util.Vector;
 
 public class CheckinputTxt {
     String line;
     String courseNum;
     String courseName;
-    List kdamCorseList;
+    Vector<String> kdamCorseList;
     int numOfMaxStudents;
     public CheckinputTxt(String line){
         this.line=line;
@@ -38,7 +39,7 @@ public class CheckinputTxt {
 
     }
     public void setKdamCorseList(){
-        kdamCorseList=new List();
+        kdamCorseList=new Vector<String>();
         int i=1;
         while (line.charAt(i)!='|'){
             int j=i;
@@ -90,7 +91,7 @@ public class CheckinputTxt {
     public int getNumOfMaxStudents(){
         return numOfMaxStudents;
     }
-    public List getKdamCorseList(){
+    public Vector<String> getKdamCorseList(){
         return kdamCorseList;
     }
 }
