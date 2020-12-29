@@ -18,6 +18,7 @@ public class ObjectEncoderDecoder implements MessageEncoderDecoder<Serializable>
 
     @Override
     public Serializable decodeNextByte(byte nextByte) {
+        System.out.println("decode :niv added");
         if (objectBytes == null) { //indicates that we are still reading the length
             lengthBuffer.put(nextByte);
             if (!lengthBuffer.hasRemaining()) { //we read 4 bytes and therefore can take the length

@@ -5,6 +5,7 @@ import bgu.spl.net.srv.Database;
 
 public class MessagingProtocolAdminImpl implements MessagingProtocol<Message> {
     private boolean shouldTerminate = false;
+    String userName;
 
     @Override
     public Message process( Message msg) {
