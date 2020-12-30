@@ -82,7 +82,7 @@ bool ConnectionHandler::sendBytes(const char bytes[], int bytesToWrite) {
   * @return
   */
 bool ConnectionHandler::getLine(std::string& line) {
-    return getFrameAscii(line, '\n');
+    return getFrameAscii(line, '\0');
 }
 /**
  *
@@ -126,8 +126,8 @@ bool ConnectionHandler::sendFrameAscii(const std::string& frame, char delimiter)
     std::string opCode=c.opcodeToSend(frame);
     bool result= sendBytes(opCode.c_str(),opCode.length());
     if(result){
-       frame.substr(frame.find_first_of(' '));
-	 result=sendBytes(frame.c_str(),frame.length());}
+//       frame.substr(frame.find_first_of(' '));
+	 result=sendBytes( frame.substr(frame.find_first_of(' ')).c_str(), frame.substr(frame.find_first_of(' ')).length());}
 	if(!result) return false;
 	return sendBytes(&delimiter,1);
 }

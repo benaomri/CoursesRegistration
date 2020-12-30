@@ -18,8 +18,8 @@ public:
 
 
     void run(){
-//        while (1)
-        for(int i=0;i<=1;i++){
+        while (1){
+//        for(int i=0;i<=1;i++){
             if(shouldTermint)
                 break;
             const short bufsize = 1024;
@@ -27,6 +27,7 @@ public:
             std::cin.getline(buf, bufsize);
             std::string line(buf);
             messegeQueue.push(line);
+            std::cout<<"thred run"<<std::endl;
 
 
 

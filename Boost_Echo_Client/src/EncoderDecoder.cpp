@@ -28,8 +28,8 @@ public:
           std::cout<<"encoderdecoder"<<std::endl;
         std::string opToReturn=messege.substr(0,messege.find_first_of(' '));
 
-           if(opToReturn =="ADMINREG") return "01";
-            if(opToReturn =="STUDENTREG") return "02";
+           if(opToReturn =="ADMINREG") return "00 01";
+            if(opToReturn =="STUDENTREG") return "00 02";
 //            if(opToReturn =="LOGIN") return 03;
 //        if(opToReturn =="LOGOUT") return 04;
 //        if(opToReturn =="COURSEREG") return 05;
@@ -72,9 +72,18 @@ public:
  * @return the messege from the server after decode
  */
     std::string decodeOpCode( std::string& answer){
-         if(answer.substr(0,5).compare("0012"))
-             return "ACK"+answer.substr(5);
-         else  return "ERROR "+answer.substr(5);
+         if(answer.substr(0,5).compare("0012")){
+             std::cout<<"answer"<<std::endl;
+            std::cout<<answer<<std::endl;
+            std::cout<<answer.substr(0,5)<<std::endl;
+            std::cout<<answer.substr(5)<<std::endl;
+            std::cout<<answer.substr(4)<<std::endl;
+            std::cout<<answer.substr(3)<<std::endl;
+             return "ACK"+answer.substr(3);
+
+         }
+
+         else  return "ERROR "+answer.substr(3);
 
      }
 
