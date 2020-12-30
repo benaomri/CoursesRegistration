@@ -42,20 +42,91 @@ public class Test {
         assertSame("12", getMsg.getMessageType());
 
 
-        //Check Login
+        //Check Register To course
         Data.clear();
-        Data.add("Morty a123");
-        newMsg=new Message("00 03",Data);
-        assertFalse(Database.getInstance().isLogin("Morty"));
+        Data.add("101");
+        newMsg=new Message("00 05",Data);
+        assertFalse(Database.getInstance().checkRegStudentToCourse("Morty","101"));
         arr = encoderDecoder.encode(newMsg);
         msg=null;
         i=0;
         while (msg==null)
             msg=encoderDecoder.decodeNextByte(arr[i++]);
         getMsg=prot.process(msg);
-        assertTrue(Database.getInstance().isLogin("Morty"));
+        assertTrue(Database.getInstance().checkRegStudentToCourse("Morty","101"));
         assertSame("12", getMsg.getMessageType());
 
+        Data.clear();
+        Data.add("102");
+        newMsg=new Message("00 05",Data);
+        assertFalse(Database.getInstance().checkRegStudentToCourse("Morty","102"));
+        arr = encoderDecoder.encode(newMsg);
+        msg=null;
+        i=0;
+        while (msg==null)
+            msg=encoderDecoder.decodeNextByte(arr[i++]);
+        getMsg=prot.process(msg);
+        assertTrue(Database.getInstance().checkRegStudentToCourse("Morty","102"));
+        assertSame("12", getMsg.getMessageType());
+
+        //Try to register Kdam
+        Data.clear();
+        Data.add("311");
+        newMsg=new Message("00 05",Data);
+        assertFalse(Database.getInstance().checkRegStudentToCourse("Morty","311"));
+        arr = encoderDecoder.encode(newMsg);
+        msg=null;
+        i=0;
+        while (msg==null)
+            msg=encoderDecoder.decodeNextByte(arr[i++]);
+        getMsg=prot.process(msg);
+        assertFalse(Database.getInstance().checkRegStudentToCourse("Morty","311"));
+        assertSame("13", getMsg.getMessageType());
+
+        //Check If register
+        Data.clear();
+        Data.add("102");
+        newMsg=new Message("00 09",Data);
+        arr = encoderDecoder.encode(newMsg);
+        msg=null;
+        i=0;
+        while (msg==null)
+            msg=encoderDecoder.decodeNextByte(arr[i++]);
+        getMsg=prot.process(msg);
+        System.out.println(getMsg);
+
+        //Check Mycourse
+        Data.clear();
+        newMsg=new Message("00 11",Data);
+        arr = encoderDecoder.encode(newMsg);
+        msg=null;
+        i=0;
+        while (msg==null)
+            msg=encoderDecoder.decodeNextByte(arr[i++]);
+        getMsg=prot.process(msg);
+        System.out.println(getMsg);
+
+        //Check UnRegister
+        Data.clear();
+        Data.add("102");
+        newMsg=new Message("00 10",Data);
+        arr = encoderDecoder.encode(newMsg);
+        msg=null;
+        i=0;
+        while (msg==null)
+            msg=encoderDecoder.decodeNextByte(arr[i++]);
+        getMsg=prot.process(msg);
+        System.out.println(getMsg);
+        //Check Mycourse
+        Data.clear();
+        newMsg=new Message("00 11",Data);
+        arr = encoderDecoder.encode(newMsg);
+        msg=null;
+        i=0;
+        while (msg==null)
+            msg=encoderDecoder.decodeNextByte(arr[i++]);
+        getMsg=prot.process(msg);
+        System.out.println(getMsg);
 
     }
 

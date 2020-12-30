@@ -141,8 +141,8 @@ public class Database {
      * @return if its pissible to register to course
      */
     public boolean checkIfPossibleToReg(String courseNum,String userName){
-        return  isLogin(userName)&&//check user is logIn
-                checkIfcourseExist(courseNum)&&//check course exist in the dataBase
+
+        return  checkIfcourseExist(courseNum)&&//check course exist in the dataBase
                 checkSpaceInCourse(courseNum)&&///check course has space
                 checkKdam(courseNum, userName);//checking that the student has all the kdam courses
     }
