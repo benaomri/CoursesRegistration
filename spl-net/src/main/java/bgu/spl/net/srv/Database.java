@@ -1,6 +1,7 @@
 package bgu.spl.net.srv;
 
 import java.util.Scanner;
+import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 import java.io.*;
 
@@ -72,6 +73,8 @@ public class Database {
         registerMapStudent.putIfAbsent(name,new User(name,password));
     }
 
+
+
     /**
      *
      * @param name
@@ -124,8 +127,11 @@ public class Database {
      *
      * @param name
      */
-    public void isAdmin(String name){
+    public void makeAdmin(String name){
         registerMapStudent.get(name).isAdmin=true;
+    }
+    public boolean isAdmin(String name){
+        return registerMapStudent.get(name).isAdmin;
     }
 
     /**
@@ -162,31 +168,41 @@ public class Database {
      */
     public boolean checkKdam(String courseNum,String userName){//checking that the student has all the kdam courses
         return registerMapStudent.get(userName).KdamCourses.containsAll(coursesMap.get(courseNum).KdamCoursesList);
-
-
         }
 
-    /**
-     *
-     * @param userName
-     * @param courseNum
-     */
-    public void addCourseToKdam(String userName,String courseNum){
-        registerMapStudent.get(userName).KdamCourses.add(courseNum);
+
+
+     public void registerToCourse(String userName, String courseNumber){
+         registerMapStudent.get(userName).addCourse(courseNumber);
+        coursesMap.get(courseNumber).regStudent(userName);
+     }
+
+    public void unregisterToCourse(String userName, String courseNumber) {
+        registerMapStudent.get(userName).removeCourse(courseNumber);
+        coursesMap.get(courseNumber).unregStudent(userName);
+    }
+    public String getMyCourse(String user){
+        return registerMapStudent.get(user).KdamCourses.toString();
     }
 
-    /**
-     *
-     * @param courseNum
-     */
-    public void updateLeftCourse(String courseNum){
-        coursesMap.get(courseNum).numOfLeftSeats--;
-    }
+
     public boolean checkRegStudentToCourse(String userName,String courseNum){
         return coursesMap.get(courseNum).studentsRegToCourse.contains(userName);
     }
 
- public static void main(String[] args) {
+    public Vector<String> getKdam(String coursNum){
+        return coursesMap.get(coursNum).KdamCoursesList;
+    }
+
+    public String courseStat(String course){
+        return coursesMap.get(course).toString();
+    }
+
+    public String studentStat(String student){
+        return registerMapStudent.get(student).toString();
+    }
+
+    public static void main(String[] args) {
 Database d=new Database();
      System.out.println(d.initialize("/home/spl211/IdeaProjects/DataBase/src/Courses.txt"));
      System.out.println(d.coursesMap.get("101").courseNum);

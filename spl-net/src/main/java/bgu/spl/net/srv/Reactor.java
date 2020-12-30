@@ -58,14 +58,17 @@ public class Reactor<T> implements Server<T> {
                     if (!key.isValid()) {
                         continue;
                     } else if (key.isAcceptable()) {
+                        System.out.println("is Access");
                         handleAccept(serverSock, selector);
                     } else {
+                        System.out.println("key read write");
                         handleReadWrite(key);
+                        System.out.println("readWrite");
                     }
                 }
 
                 selector.selectedKeys().clear(); //clear the selected keys set so that we can know about new events
-
+                System.out.println("clear selected keys ");
             }
 
         } catch (ClosedSelectorException ex) {
@@ -93,6 +96,7 @@ public class Reactor<T> implements Server<T> {
 
 
     private void handleAccept(ServerSocketChannel serverChan, Selector selector) throws IOException {
+        System.out.println("handle accept");
         SocketChannel clientChan = serverChan.accept();
         clientChan.configureBlocking(false);
         final NonBlockingConnectionHandler<T> handler = new NonBlockingConnectionHandler<>(
@@ -101,6 +105,7 @@ public class Reactor<T> implements Server<T> {
                 clientChan,
                 this);
         clientChan.register(selector, SelectionKey.OP_READ, handler);
+        System.out.println("finish handle");
     }
 
     private void handleReadWrite(SelectionKey key) {

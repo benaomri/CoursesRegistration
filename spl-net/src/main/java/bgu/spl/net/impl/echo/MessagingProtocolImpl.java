@@ -1,30 +1,20 @@
-package bgu.spl.net.impl.rci;
+package bgu.spl.net.impl.echo;
 
 import bgu.spl.net.api.MessagingProtocol;
-import bgu.spl.net.impl.echo.Message;
-import bgu.spl.net.impl.echo.MessageACK;
-import bgu.spl.net.impl.echo.MessageErr;
 import bgu.spl.net.srv.Database;
 
-import java.io.Serializable;
 import java.util.Vector;
 
-public class RemoteCommandInvocationProtocol<T> implements MessagingProtocol<Message> {
-
+public class MessagingProtocolImpl implements MessagingProtocol<Message> {
     private boolean shouldTerminate = false;
     String userName=null;
     boolean isAdmin;
 
-    public RemoteCommandInvocationProtocol() {
-
-    }
-
     @Override
-//    public Serializable process(Serializable msg) {
-//        return ((Command) msg).execute(arg);
-        public Message process(Message msg) {
+    public Message process( Message msg) {
         switch (msg.getMessageType()) {
             case ("01"): { //AdminRegister
+                System.out.println("Enter");
                 String user = msg.getData().elementAt(0);
                 String pass = msg.getData().elementAt(1);
 
@@ -175,7 +165,7 @@ public class RemoteCommandInvocationProtocol<T> implements MessagingProtocol<Mes
 
     @Override
     public boolean shouldTerminate() {
-        return false;
+        return shouldTerminate;
     }
     public Message ackMsg(Vector<String> data){
         return new MessageACK(data);
@@ -196,6 +186,5 @@ public class RemoteCommandInvocationProtocol<T> implements MessagingProtocol<Mes
     public  boolean isLogin(){
         return userName!=null;
     }
-
 
 }

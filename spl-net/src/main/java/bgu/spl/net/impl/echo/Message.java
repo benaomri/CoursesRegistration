@@ -1,38 +1,32 @@
 package bgu.spl.net.impl.echo;
 
+import java.util.Vector;
+
+/**
+ * This Father Class Message
+ *
+ */
 public class Message {
-    private String messageName;
-    private String userName;
-    private String userPassword;
+    protected String messageType;
+    protected Vector<String> data;
+
+    public Message(){}
 
 
-    public Message(String messageName,String userName,String userPassword){
-        this.messageName=messageName;
-        this.userName=userName;
-        this.userPassword=userPassword;
+    public Message(String opCode,Vector<String> data)
+    {
+        messageType=opCode;
+        this.data=data;
     }
 
-    public String getMessageName() {
-        return messageName;
+    public String getMessageType(){
+        return messageType;
     }
 
-    public void setMessageName(String messageName) {
-        this.messageName = messageName;
+    public Vector<String> getData(){
+        return data;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-    public void setUserName(String userName){
-        this.userName=userName;
-    }
 
-    public String getUserPassword() {
-        return userPassword;
-    }
-    public String getCourseNum(){return "2";}
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
 }
