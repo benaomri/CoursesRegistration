@@ -38,7 +38,7 @@ public class Database {
      * loades the courses from the file path specified
      * into the Database, returns true if successful.
      */
-    boolean initialize(String coursesFilePath)  {
+    public boolean initialize(String coursesFilePath)  {
         File file=new File(coursesFilePath);
 //        BufferedReader bufferedReader=new BufferedReader(new FileReader(file));
       try {
@@ -202,8 +202,16 @@ public class Database {
         return registerMapStudent.get(student).toString();
     }
 
+    @Override
+    public String toString() {
+        return "Database{" +
+                "registerMapStudent=" + registerMapStudent.toString() +
+                ", coursesMap=" + coursesMap.toString() +
+                '}';
+    }
+
     public static void main(String[] args) {
-Database d=new Database();
+        Database d=new Database();
      System.out.println(d.initialize("/home/spl211/IdeaProjects/DataBase/src/Courses.txt"));
      System.out.println(d.coursesMap.get("101").courseNum);
 

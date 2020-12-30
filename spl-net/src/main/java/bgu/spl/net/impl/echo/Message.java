@@ -25,6 +25,8 @@ public class Message {
         return data;
     }
 
-
-
+    @Override
+    public String toString() {
+        return  (messageType+" "+data);
+    }
 }

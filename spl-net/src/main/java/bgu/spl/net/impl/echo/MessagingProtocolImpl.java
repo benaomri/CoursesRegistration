@@ -5,7 +5,7 @@ import bgu.spl.net.srv.Database;
 
 import java.util.Vector;
 
-public class MessagingProtocolAdminImpl implements MessagingProtocol<Message> {
+public class MessagingProtocolImpl implements MessagingProtocol<Message> {
     private boolean shouldTerminate = false;
     String userName=null;
     boolean isAdmin;

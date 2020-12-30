@@ -11,6 +11,6 @@ public class MessageErr extends Message {
 
     @Override
     public String toString() {
-        return messageType+errOPCODe;
+        return messageType+" "+errOPCODe;
     }
 }
