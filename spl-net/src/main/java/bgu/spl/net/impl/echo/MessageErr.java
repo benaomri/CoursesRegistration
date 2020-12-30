@@ -4,8 +4,8 @@ import java.util.Vector;
 
 public class MessageErr extends Message {
     String errOPCODe;
-    public MessageErr(String opCode, Vector<String> data) {
-        super(opCode, data);
+    public MessageErr(Vector<String> data) {
+        super("13", data);
         errOPCODe=data.elementAt(0);
     }
 

@@ -13,10 +13,9 @@ public class MessageACK extends Message {
     String ACKopCode;
     String opCodeOptional;
 
-    public MessageACK(String messageType, Vector<String> data)
+    public MessageACK(Vector<String> data)
     {
-        super(messageType,data);
-        this.messageType=messageType;
+        super("12",data);
         this.ACKopCode=data.elementAt(0);
         if (data.size()==1)
          this.opCodeOptional=null;
