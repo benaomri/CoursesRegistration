@@ -81,10 +81,8 @@ public class Database {
      * @return
      * @throws Exception
      */
-    public String getPassword(String name) throws Exception {
-        if (!(checkIfRegister(name)))
-            throw new Exception(name+"is not register");
-        return registerMapStudent.get(name).userPassword;
+    public boolean checkPassword(String name,String Pass) {
+        return registerMapStudent.get(name).userPassword.equals(Pass);
     }
 
     /**
