@@ -10,8 +10,6 @@ public class Message {
     protected String messageType;
     protected Vector<String> data;
 
-    public Message(){}
-
 
     public Message(String opCode,Vector<String> data)
     {
@@ -27,6 +25,8 @@ public class Message {
         return data;
     }
 
-
-
+    @Override
+    public String toString() {
+        return  (messageType+" "+data);
+    }
 }

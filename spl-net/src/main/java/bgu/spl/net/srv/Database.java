@@ -38,7 +38,7 @@ public class Database {
      * loades the courses from the file path specified
      * into the Database, returns true if successful.
      */
-    boolean initialize(String coursesFilePath)  {
+    public boolean initialize(String coursesFilePath)  {
         File file=new File(coursesFilePath);
 //        BufferedReader bufferedReader=new BufferedReader(new FileReader(file));
       try {
@@ -141,8 +141,8 @@ public class Database {
      * @return if its pissible to register to course
      */
     public boolean checkIfPossibleToReg(String courseNum,String userName){
-        return  isLogin(userName)&&//check user is logIn
-                checkIfcourseExist(courseNum)&&//check course exist in the dataBase
+
+        return  checkIfcourseExist(courseNum)&&//check course exist in the dataBase
                 checkSpaceInCourse(courseNum)&&///check course has space
                 checkKdam(courseNum, userName);//checking that the student has all the kdam courses
     }
@@ -202,8 +202,16 @@ public class Database {
         return registerMapStudent.get(student).toString();
     }
 
+    @Override
+    public String toString() {
+        return "Database{" +
+                "registerMapStudent=" + registerMapStudent.toString() +
+                ", coursesMap=" + coursesMap.toString() +
+                '}';
+    }
+
     public static void main(String[] args) {
-Database d=new Database();
+        Database d=new Database();
      System.out.println(d.initialize("/home/spl211/IdeaProjects/DataBase/src/Courses.txt"));
      System.out.println(d.coursesMap.get("101").courseNum);
 

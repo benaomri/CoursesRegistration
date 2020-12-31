@@ -49,7 +49,7 @@ public class MessageEncoderDecoder implements bgu.spl.net.api.MessageEncoderDeco
         //this is not actually required as it is the default encoding in java.
         String result = new String(bytes, 0, len, StandardCharsets.UTF_8);
         System.out.println(result);
-        String OPCODE=result.substring(0,5);
+        String OPCODE=result.substring(3,5);
         System.out.println(OPCODE);
         Vector<String> data=stringToVec(result);
 
@@ -63,12 +63,14 @@ public class MessageEncoderDecoder implements bgu.spl.net.api.MessageEncoderDeco
         int index=6;
         String name="";
         while(index<str.length()) {
-            if(str.charAt(index)==' ') {
+
+             if(str.charAt(index)==' ') {
                 data.add(name);
                 name="";
             }
             else {
-                name = name + str.charAt(index);
+                if (!(str.charAt(index)=='[' | str.charAt(index)==']'))
+                    name = name + str.charAt(index);
             }
             index++;
         }

@@ -12,7 +12,7 @@ public class NewsFeedServerMain {
 
     public static void main(String[] args) {
         NewsFeed feed = new NewsFeed(); //one shared object
-        Message mss=new Message();
+//        Message mss=new Message();
 
 // you can use any server...
 //        Server.threadPerClient(
