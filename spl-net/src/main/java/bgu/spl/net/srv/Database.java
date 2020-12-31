@@ -1,7 +1,6 @@
 package bgu.spl.net.srv;
 
 import java.util.Scanner;
-import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 import java.io.*;
 
@@ -38,7 +37,7 @@ public class Database {
      * loades the courses from the file path specified
      * into the Database, returns true if successful.
      */
-    public boolean initialize(String coursesFilePath)  {
+    boolean initialize(String coursesFilePath)  {
         File file=new File(coursesFilePath);
 //        BufferedReader bufferedReader=new BufferedReader(new FileReader(file));
       try {
@@ -72,8 +71,6 @@ public class Database {
     public void register(String name,String password){
         registerMapStudent.putIfAbsent(name,new User(name,password));
     }
-
-
 
     /**
      *
@@ -127,11 +124,8 @@ public class Database {
      *
      * @param name
      */
-    public void makeAdmin(String name){
+    public void isAdmin(String name){
         registerMapStudent.get(name).isAdmin=true;
-    }
-    public boolean isAdmin(String name){
-        return registerMapStudent.get(name).isAdmin;
     }
 
     /**
@@ -141,8 +135,8 @@ public class Database {
      * @return if its pissible to register to course
      */
     public boolean checkIfPossibleToReg(String courseNum,String userName){
-
-        return  checkIfcourseExist(courseNum)&&//check course exist in the dataBase
+        return  isLogin(userName)&&//check user is logIn
+                checkIfcourseExist(courseNum)&&//check course exist in the dataBase
                 checkSpaceInCourse(courseNum)&&///check course has space
                 checkKdam(courseNum, userName);//checking that the student has all the kdam courses
     }
@@ -168,50 +162,32 @@ public class Database {
      */
     public boolean checkKdam(String courseNum,String userName){//checking that the student has all the kdam courses
         return registerMapStudent.get(userName).KdamCourses.containsAll(coursesMap.get(courseNum).KdamCoursesList);
+
+
         }
 
-
-
-     public void registerToCourse(String userName, String courseNumber){
-         registerMapStudent.get(userName).addCourse(courseNumber);
-        coursesMap.get(courseNumber).regStudent(userName);
-     }
-
-    public void unregisterToCourse(String userName, String courseNumber) {
-        registerMapStudent.get(userName).removeCourse(courseNumber);
-        coursesMap.get(courseNumber).unregStudent(userName);
-    }
-    public String getMyCourse(String user){
-        return registerMapStudent.get(user).KdamCourses.toString();
+    /**
+     *
+     * @param userName
+     * @param courseNum
+     */
+    public void addCourseToKdam(String userName,String courseNum){
+        registerMapStudent.get(userName).KdamCourses.add(courseNum);
     }
 
-
+    /**
+     *
+     * @param courseNum
+     */
+    public void updateLeftCourse(String courseNum){
+        coursesMap.get(courseNum).numOfLeftSeats--;
+    }
     public boolean checkRegStudentToCourse(String userName,String courseNum){
         return coursesMap.get(courseNum).studentsRegToCourse.contains(userName);
     }
 
-    public Vector<String> getKdam(String coursNum){
-        return coursesMap.get(coursNum).KdamCoursesList;
-    }
-
-    public String courseStat(String course){
-        return coursesMap.get(course).toString();
-    }
-
-    public String studentStat(String student){
-        return registerMapStudent.get(student).toString();
-    }
-
-    @Override
-    public String toString() {
-        return "Database{" +
-                "registerMapStudent=" + registerMapStudent.toString() +
-                ", coursesMap=" + coursesMap.toString() +
-                '}';
-    }
-
-    public static void main(String[] args) {
-        Database d=new Database();
+ public static void main(String[] args) {
+Database d=new Database();
      System.out.println(d.initialize("/home/spl211/IdeaProjects/DataBase/src/Courses.txt"));
      System.out.println(d.coursesMap.get("101").courseNum);
 

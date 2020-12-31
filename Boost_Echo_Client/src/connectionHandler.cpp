@@ -1,5 +1,8 @@
-#include <connectionHandler.h>
- 
+#include </home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/include/connectionHandler.h>
+#include <iostream>
+#include <mutex>
+#include <thread>
+#include "/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/EncoderDecoder.cpp"
 using boost::asio::ip::tcp;
 
 using std::cin;
@@ -7,9 +10,15 @@ using std::cout;
 using std::cerr;
 using std::endl;
 using std::string;
- 
+ /**
+  *
+  * @param host
+  * @param port
+  */
 ConnectionHandler::ConnectionHandler(string host, short port): host_(host), port_(port), io_service_(), socket_(io_service_){}
-    
+    /**
+     *
+     */
 ConnectionHandler::~ConnectionHandler() {
     close();
 }
@@ -46,7 +55,12 @@ bool ConnectionHandler::getBytes(char bytes[], unsigned int bytesToRead) {
     }
     return true;
 }
-
+/**
+ *
+ * @param bytes
+ * @param bytesToWrite
+ * @return
+ */
 bool ConnectionHandler::sendBytes(const char bytes[], int bytesToWrite) {
     int tmp = 0;
 	boost::system::error_code error;
@@ -62,16 +76,30 @@ bool ConnectionHandler::sendBytes(const char bytes[], int bytesToWrite) {
     }
     return true;
 }
- 
+ /**
+  *
+  * @param line
+  * @return
+  */
 bool ConnectionHandler::getLine(std::string& line) {
-    return getFrameAscii(line, '\n');
+    return getFrameAscii(line, '\0');
 }
-
+/**
+ *
+ * @param line
+ * @return
+ */
 bool ConnectionHandler::sendLine(std::string& line) {
-    return sendFrameAscii(line, '\n');
-}
- 
 
+    return sendFrameAscii(line, '\0');
+}
+
+/**
+ *
+ * @param frame
+ * @param delimiter
+ * @return
+ */
 bool ConnectionHandler::getFrameAscii(std::string& frame, char delimiter) {
     char ch;
     // Stop when we encounter the null character.
@@ -94,7 +122,12 @@ bool ConnectionHandler::getFrameAscii(std::string& frame, char delimiter) {
  
  
 bool ConnectionHandler::sendFrameAscii(const std::string& frame, char delimiter) {
-	bool result=sendBytes(frame.c_str(),frame.length());
+    EncoderDecoder c;
+    std::string opCode=c.opcodeToSend(frame);
+    bool result= sendBytes(opCode.c_str(),opCode.length());
+    if(result){
+//       frame.substr(frame.find_first_of(' '));
+	 result=sendBytes( frame.substr(frame.find_first_of(' ')).c_str(), frame.substr(frame.find_first_of(' ')).length());}
 	if(!result) return false;
 	return sendBytes(&delimiter,1);
 }
