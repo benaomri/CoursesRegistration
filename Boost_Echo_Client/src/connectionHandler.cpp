@@ -131,7 +131,13 @@ bool ConnectionHandler::sendFrameAscii(const std::string& frame, char delimiter)
 	if(!result) return false;
 	return sendBytes(&delimiter,1);
 }
- 
+unsigned long ConnectionHandler::readableByts() {
+    boost::asio::socket_base::bytes_readable command(true);
+    socket_.io_control(command);
+    std::size_t bytes_readable = command.get();
+    return bytes_readable ;
+}
+
 // Close down the connection properly.
 void ConnectionHandler::close() {
     try{

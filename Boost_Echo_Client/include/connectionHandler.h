@@ -44,6 +44,9 @@ public:
     // Send a message to the remote host.
     // Returns false in case connection is closed before all the data is sent.
     bool sendFrameAscii(const std::string& frame, char delimiter);
+
+    //return num of byts that the client get from server
+    unsigned long readableByts();
 	
     // Close down the connection properly.
     void close();
