@@ -52,7 +52,8 @@ public:
  * @return the messege from the server after decode
  */
     std::string decodeOpCode( std::string& answer){
-         if(answer.substr(0,5).compare("0012")==0){
+
+         if(answer.substr(0,2).compare("12")==0){
              return "ACK " + answer.substr(3);
 
 
