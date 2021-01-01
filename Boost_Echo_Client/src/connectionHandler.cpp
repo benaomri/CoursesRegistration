@@ -126,11 +126,15 @@ bool ConnectionHandler::sendFrameAscii(const std::string& frame, char delimiter)
     std::string opCode=c.opcodeToSend(frame);
     bool result= sendBytes(opCode.c_str(),opCode.length());
     if(result){
-//       frame.substr(frame.find_first_of(' '));
+        if(opCode!="00 13")//check if legal message
 	 result=sendBytes( frame.substr(frame.find_first_of(' ')).c_str(), frame.substr(frame.find_first_of(' ')).length());}
 	if(!result) return false;
 	return sendBytes(&delimiter,1);
 }
+/**
+ * unblocking method
+ * @return amount of bytes from server that is possible to read
+ */
 unsigned long ConnectionHandler::readableByts() {
     boost::asio::socket_base::bytes_readable command(true);
     socket_.io_control(command);

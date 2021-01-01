@@ -40,6 +40,18 @@ string
 queue
 /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/queue
 
+/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/connectionHandler.cpp
+/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/include/connectionHandler.h
+-
+iostream
+-
+mutex
+-
+thread
+-
+/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/EncoderDecoder.cpp
+-
+
 /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/echoClient.cpp
 boost/asio/socket_base.hpp
 /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/boost/asio/socket_base.hpp

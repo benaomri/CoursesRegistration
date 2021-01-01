@@ -35,6 +35,7 @@ int main (int argc, char *argv[]) {
 	std::queue<std::string>messegeQueue;
 	Task readFromKey(messegeQueue);
     std::thread threadReader(&Task::run,readFromKey);
+    EncoderDecoder c;
     int len=0;
 
     while (continueRun) {
@@ -48,7 +49,7 @@ int main (int argc, char *argv[]) {
                 std::cout << "Disconnected. Exiting...\n" << std::endl;
                 break;
             }
-            std::cout << "Sent " << len+1 << " bytes to server" << std::endl;
+//            std::cout << "Sent " << len+1 << " bytes to server" << std::endl;
         }
 ////		 connectionHandler.sendLine(line) appends '\n' to the message. Therefor we send len+1 bytes.
 
@@ -79,22 +80,27 @@ int main (int argc, char *argv[]) {
             // A C string must end with a 0 char delimiter.  When we filled the answer buffer from the socket
             // we filled up to the \n char - we must make sure now that a 0 char is also present. So we truncate last character.
 //        answer.resize(len-1);
-            EncoderDecoder c;
+
             std::cout << answer << std::endl;
             answer = c.decodeOpCode(answer);
-            std::cout << "Reply: " << answer << " " <<  std::endl << std::endl;
+          //  std::cout << "Reply: " << answer << " " <<  std::endl << std::endl;
+            bool teminateNPrint=c.printAnswer(answer);
+            readFromKey.shouldTermint=teminateNPrint;
+            continueRun=!teminateNPrint;
 
         }
 
-        if (answer.substr(0,3) == "ACK") {
-            std::cout << answer.substr(0,3) << std::endl;
-            if(answer.substr(4)=="04") {
-                std::cout << "Exiting...\n" << std::endl;
-                readFromKey.shouldTermint = true;
-                continueRun=false;
-                break;
-            }
-        }
+
+//        if (answer.substr(0,3) == "ACK") {
+//            std::cout << answer.substr(0,3) << std::endl;
+//            if(answer.substr(4)=="04") {
+//                std::cout << "Exiting...\n" << std::endl;
+//                readFromKey.shouldTermint = true;
+//                continueRun=false;
+//                break;
+//            }
+//        }
     }
     return 0;
 }
+

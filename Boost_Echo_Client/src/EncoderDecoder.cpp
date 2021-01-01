@@ -25,7 +25,6 @@ class EncoderDecoder{
 
 public:
      std::string opcodeToSend(std::string messege){
-          std::cout<<"encoderdecoder"<<std::endl;
         std::string opToReturn=messege.substr(0,messege.find_first_of(' '));
 
            if(opToReturn =="ADMINREG") return "00 01";
@@ -40,7 +39,7 @@ public:
         if(opToReturn =="UNREGISTER") return "00 10";
         if(opToReturn =="MYCOURSES") return "00 11";
         if(opToReturn =="ACK") return "00 12";
-        if(opToReturn =="ERR") return "00 13";
+         return "00 13";
 //            default:return "err";
 
 
@@ -53,8 +52,7 @@ public:
  * @return the messege from the server after decode
  */
     std::string decodeOpCode( std::string& answer){
-         if(answer.substr(0,5).compare("0012")){
-             std::cout<<"answer"<<std::endl;
+         if(answer.substr(0,5).compare("0012")==0){
              return "ACK " + answer.substr(3);
 
 
@@ -63,6 +61,18 @@ public:
          else  return "ERROR "+answer.substr(3);
 
      }
+     bool printAnswer(std::string answer){
+         if (answer.substr(0,3) == "ACK") {
+             std::cout << answer << std::endl;
+             if(answer.substr(4)=="04") {
+                 std::cout << "Exiting...\n" << std::endl;
+                 return true;
+             }
+         }else{
+             std::cout << answer << std::endl;
+             return false;
+         }
+    }
 
 
 
