@@ -18,7 +18,7 @@ public:
 
 
     void run(){
-        while (1){
+        while (!shouldTermint){
             if(shouldTermint)
                 break;
             const short bufsize = 1024;
@@ -26,9 +26,6 @@ public:
             std::cin.getline(buf, bufsize);
             std::string line(buf);
             messegeQueue.push(line);
-
-
-
 
         }
     }

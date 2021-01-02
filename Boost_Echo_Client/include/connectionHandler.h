@@ -47,6 +47,8 @@ public:
 
     //return num of byts that the client get from server
     unsigned long readableByts();
+
+    static void shortToBytes(short num, char* bytesArr);
 	
     // Close down the connection properly.
     void close();

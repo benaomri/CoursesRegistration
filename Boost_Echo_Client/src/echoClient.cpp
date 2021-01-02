@@ -79,27 +79,20 @@ int main (int argc, char *argv[]) {
             len = answer.length();
             // A C string must end with a 0 char delimiter.  When we filled the answer buffer from the socket
             // we filled up to the \n char - we must make sure now that a 0 char is also present. So we truncate last character.
-//        answer.resize(len-1);
 
-            std::cout << answer << std::endl;
+
+
             answer = c.decodeOpCode(answer);
           //  std::cout << "Reply: " << answer << " " <<  std::endl << std::endl;
             bool teminateNPrint=c.printAnswer(answer);
-            readFromKey.shouldTermint=teminateNPrint;
-            continueRun=!teminateNPrint;
+            if (teminateNPrint) {
+                readFromKey.shouldTermint = teminateNPrint;
+                continueRun = !teminateNPrint;
+                //connectionHandler.close();
+            }
 
         }
 
-
-//        if (answer.substr(0,3) == "ACK") {
-//            std::cout << answer.substr(0,3) << std::endl;
-//            if(answer.substr(4)=="04") {
-//                std::cout << "Exiting...\n" << std::endl;
-//                readFromKey.shouldTermint = true;
-//                continueRun=false;
-//                break;
-//            }
-//        }
     }
     return 0;
 }

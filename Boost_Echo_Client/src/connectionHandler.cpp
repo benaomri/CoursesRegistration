@@ -3,8 +3,10 @@
 #include <mutex>
 #include <thread>
 #include "/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/EncoderDecoder.cpp"
+#include <algorithm>
 using boost::asio::ip::tcp;
-
+#include <boost/lexical_cast.hpp>
+#include <boost/algorithm/string/replace>
 using std::cin;
 using std::cout;
 using std::cerr;
@@ -123,13 +125,31 @@ bool ConnectionHandler::getFrameAscii(std::string& frame, char delimiter) {
  
 bool ConnectionHandler::sendFrameAscii(const std::string& frame, char delimiter) {
     EncoderDecoder c;
-    std::string opCode=c.opcodeToSend(frame);
-    bool result= sendBytes(opCode.c_str(),opCode.length());
-    if(result){
-        if(opCode!="00 13")//check if legal message
-	 result=sendBytes( frame.substr(frame.find_first_of(' ')).c_str(), frame.substr(frame.find_first_of(' ')).length());}
-	if(!result) return false;
-	return sendBytes(&delimiter,1);
+    short opCode=c.opcodeToSend(frame);
+    char* numberChar =new char[2];
+    shortToBytes(opCode,numberChar);
+    std::cout<<numberChar[1]<<std::endl;
+    bool result= sendBytes(numberChar,2);
+    if(result&&(opCode==1||opCode==2||opCode==3||opCode==8)){
+        std::string subFrame=frame.substr(frame.find_first_of(' ')+1);
+       boost::replace_all(subFrame," ","\0");
+        std::cout<<std::count(subFrame.begin(),subFrame.end(),'\0');
+        result = sendBytes(subFrame.c_str(),subFrame.length());
+        if(!result) return false;
+        return sendBytes(&delimiter,1);
+    }
+    if(result&&(opCode==4||opCode==11||opCode==13))
+        return true;
+    if (result&&(opCode==5||opCode==6||opCode==7||opCode==9||opCode==10)){//handdle course reg
+        std::string courseNum=frame.substr(frame.find_first_of(' '));
+        short shortCourseNum = boost::lexical_cast<short>(courseNum);//change string to short
+        c.shortToBytes(shortCourseNum,numberChar);
+        return  sendBytes(numberChar,2);
+
+    }
+
+         return result;
+
 }
 /**
  * unblocking method
@@ -141,6 +161,13 @@ unsigned long ConnectionHandler::readableByts() {
     std::size_t bytes_readable = command.get();
     return bytes_readable ;
 }
+void ConnectionHandler::shortToBytes(short num, char *bytesArr) {
+
+    bytesArr[0]=((num >> 8) & 0xFF);
+    bytesArr[1]=(num & 0xFF);
+
+
+}
 
 // Close down the connection properly.
 void ConnectionHandler::close() {
@@ -150,3 +177,4 @@ void ConnectionHandler::close() {
         std::cout << "closing failed: connection already closed" << std::endl;
     }
 }
+
