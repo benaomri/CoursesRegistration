@@ -21,10 +21,7 @@ public class Test {
         Vector<String> data=new Vector<>();
 
         //Student
-        data.add("Omri");
-        data.add("123");
-        Message reg=getMessage("02",data);
-        System.out.println(reg);
+
 
 
 
