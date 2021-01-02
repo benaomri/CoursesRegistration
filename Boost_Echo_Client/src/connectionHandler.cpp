@@ -6,7 +6,7 @@
 #include <algorithm>
 using boost::asio::ip::tcp;
 #include <boost/lexical_cast.hpp>
-#include <boost/algorithm/string/replace>
+#include <boost/algorithm/string/replace.hpp>
 using std::cin;
 using std::cout;
 using std::cerr;
@@ -114,7 +114,7 @@ bool ConnectionHandler::getFrameAscii(std::string& frame, char delimiter) {
 		}
 		if(ch!='\0')  
 			frame.append(1, ch);
-	}while (delimiter != ch);
+	}while (delimiter != ch||frame.length()==4);
     } catch (std::exception& e) {
 	std::cerr << "recv failed2 (Error: " << e.what() << ')' << std::endl;
 	return false;
@@ -132,11 +132,16 @@ bool ConnectionHandler::sendFrameAscii(const std::string& frame, char delimiter)
     bool result= sendBytes(numberChar,2);
     if(result&&(opCode==1||opCode==2||opCode==3||opCode==8)){
         std::string subFrame=frame.substr(frame.find_first_of(' ')+1);
-       boost::replace_all(subFrame," ","\0");
-        std::cout<<std::count(subFrame.begin(),subFrame.end(),'\0');
-        result = sendBytes(subFrame.c_str(),subFrame.length());
+
+        std::string subSubFrame=subFrame.substr(0,subFrame.find_first_of(' '));
+        result = sendBytes(subSubFrame.c_str(),subSubFrame.length());
         if(!result) return false;
-        return sendBytes(&delimiter,1);
+        result =  sendBytes(&delimiter,1);
+        if(!result) return false;
+        subSubFrame=subFrame.substr(subFrame.find_first_of(' ')+1);
+        result= sendBytes(subSubFrame.c_str(),subSubFrame.length());
+        if(!result) return false;
+        result =  sendBytes(&delimiter,1);
     }
     if(result&&(opCode==4||opCode==11||opCode==13))
         return true;

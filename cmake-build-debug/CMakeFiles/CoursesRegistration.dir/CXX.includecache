@@ -39,4 +39,6 @@ algorithm
 -
 boost/lexical_cast.hpp
 -
+boost/algorithm/string/replace.hpp
+-
 
