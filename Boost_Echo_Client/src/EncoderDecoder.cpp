@@ -44,11 +44,28 @@ public:
  * choose between two option: ACK and ERROR
  */
     std::string decodeOpCode( std::string& answer){
+        char* opAnswer=new char[2];
+        opAnswer[0]=answer.at(0);
+        opAnswer[1]=answer.at(1);
+        short op=bytesToShort(opAnswer);
 
-         if(answer.substr(0,2).compare("12")==0){
-             return "ACK " + answer.substr(3);
+        char* opRespond=new char[2];
+        opRespond[0]=answer.at(2);
+        opRespond[1]=answer.at(3);
+        short respond=bytesToShort(opRespond);
+        std::string toReturn="";
+
+        if(op==12){
+            toReturn.append("ACK ");
+            toReturn+=std::to_string(respond);
+            toReturn.append(answer.substr(5));
+            return toReturn  ;
          }
-         else  return "ERROR "+answer.substr(3);
+         else {
+            toReturn.append("ERROR ");
+            toReturn += std::to_string(respond);
+            return toReturn;
+        }
      }
      /**
       *

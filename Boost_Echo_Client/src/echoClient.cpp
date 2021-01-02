@@ -83,7 +83,7 @@ int main (int argc, char *argv[]) {
 
 
             answer = c.decodeOpCode(answer);
-          //  std::cout << "Reply: " << answer << " " <<  std::endl << std::endl;
+            std::cout << "Reply: " << answer << " " <<  std::endl << std::endl;
             bool teminateNPrint=c.printAnswer(answer);
             if (teminateNPrint) {
                 readFromKey.shouldTermint = teminateNPrint;

@@ -104,17 +104,26 @@ bool ConnectionHandler::sendLine(std::string& line) {
  */
 bool ConnectionHandler::getFrameAscii(std::string& frame, char delimiter) {
     char ch;
+    int getOPC=0;
+
     // Stop when we encounter the null character.
     // Notice that the null character is not appended to the frame string.
     try {
 	do{
 		if(!getBytes(&ch, 1))
-		{
 			return false;
-		}
-		if(ch!='\0')  
+
+		if(ch!='\0')
 			frame.append(1, ch);
-	}while (delimiter != ch||frame.length()==4);
+		else
+            frame.append(1, ch);
+        getOPC++;
+        if(getOPC==4){
+            if(frame.at(1)!='\f')
+                ch='\0';
+        }
+
+	}while ((delimiter != ch)|((getOPC>0)&(getOPC<4)));
     } catch (std::exception& e) {
 	std::cerr << "recv failed2 (Error: " << e.what() << ')' << std::endl;
 	return false;
