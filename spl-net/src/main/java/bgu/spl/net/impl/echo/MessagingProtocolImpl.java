@@ -14,13 +14,12 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
     public Message process( Message msg) {
         switch (msg.getMessageType()) {
             case ("01"): { //AdminRegister
-                System.out.println("Enter");
                 String user = msg.getData().elementAt(0);
                 String pass = msg.getData().elementAt(1);
 
-                if (Database.getInstance().checkIfRegister(user))
+                if (Database.getInstance().checkIfRegister(user)||
+                        Database.getInstance().register(user, pass))//
                     return errorMsg("01");
-                Database.getInstance().register(user, pass);
                 Database.getInstance().makeAdmin(user);
                 Vector<String> data = new Vector<>();
                 data.add("01");
@@ -39,17 +38,23 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
 
             }
             case ("03"):{//Login
-                String user = msg.getData().elementAt(0);
-                String pass = msg.getData().elementAt(1);
 
-                if (!Database.getInstance().checkIfRegister(user))
-                    return errorMsg("03");
-                Database.getInstance().login(user);
-                userName = user;
-                isAdmin = Database.getInstance().isAdmin(user);
-                Vector<String> data = new Vector<>();
-                data.add("03");
-                return ackMsg(data);
+                if (!isLogin()) {//check if is not login
+                    String user = msg.getData().elementAt(0);
+                    String pass = msg.getData().elementAt(1);
+
+                    if (!Database.getInstance().checkIfRegister(user)||!Database.getInstance().checkPassword(user,pass))
+                        return errorMsg("03");//return err if is not register or wrong password
+                    Database.getInstance().login(user);
+                    if (Database.getInstance().isLogin(user)) {//check if he succeed to login
+                        userName = user;
+                        isAdmin = Database.getInstance().isAdmin(user);
+                        Vector<String> data = new Vector<>();
+                        data.add("03");
+                        return ackMsg(data);
+                    }
+                }
+                return errorMsg("03");
             }
             case ("04"): {//LogOut
                 if(isLogin()) {
@@ -68,7 +73,7 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
             case ("05"): {//RegisterCourse
                 if (isLogin()) {
                     if (isAdmin)
-                        errorMsg("05");
+                        return errorMsg("05");
                     else {
                         String courseNum=msg.getData().elementAt(0);
                         if (!Database.getInstance().checkIfPossibleToReg(courseNum, userName))
@@ -99,11 +104,11 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
             case ("07"): {//"COURSESTAT"
                 if (isLogin()&&isAdmin) {
                     String course=msg.getData().elementAt(0);
-                    if (Database.getInstance().checkIfcourseExist(course))
+                    if (!Database.getInstance().checkIfcourseExist(course))
                         return errorMsg("07");
                     Vector<String> data=new Vector<>();
                     data.add("07");
-                    data.add(Database.getInstance().courseStat(course));
+                    data.add("\n"+Database.getInstance().courseStat(course));
                     return ackMsg(data);
                 }
                 else
@@ -114,7 +119,7 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
                     String student=msg.getData().elementAt(0);
                     Vector<String> data=new Vector<>();
                     data.add("08");
-                    data.add(Database.getInstance().studentStat(student));
+                    data.add("\n"+Database.getInstance().studentStat(student));
                     return ackMsg(data);
                 }
                 else
@@ -157,7 +162,7 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
 
             }
         }
-        return errorMsg("14");
+        return errorMsg("13");
 
     }
 
