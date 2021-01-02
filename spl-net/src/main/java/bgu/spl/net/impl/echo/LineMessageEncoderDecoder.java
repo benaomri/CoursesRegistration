@@ -40,7 +40,7 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         return (op.equals("04")|op.equals("11"));
     }
     private byte[] ackByte(Message msg){
-        String optional=msg.toString().substring(5);
+        String optional=msg.toString().substring(5)+'\0';
         byte[] string=optional.getBytes();
         short op= Short.parseShort(msg.getData().elementAt(0));
         byte[] opCodes=shortToBytes((short) 12,op);
@@ -49,9 +49,7 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
             if(i<opCodes.length)
                 toReturn[i]=opCodes[i];
             else
-                toReturn[i]=string[i-string.length];
-
-
+                toReturn[i]=string[toReturn.length-1-i];
         }
 
         return  toReturn;
