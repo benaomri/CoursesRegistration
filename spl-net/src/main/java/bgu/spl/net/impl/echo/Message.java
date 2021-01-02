@@ -1,38 +1,47 @@
 package bgu.spl.net.impl.echo;
 
+import java.util.Vector;
+
+/**
+ * This Father Class Message
+ *
+ */
 public class Message {
-    private String messageName;
-    private String userName;
-    private String userPassword;
+    protected String messageType;
+    protected Vector<String> data;
 
 
-    public Message(String messageName,String userName,String userPassword){
-        this.messageName=messageName;
-        this.userName=userName;
-        this.userPassword=userPassword;
+    public Message(String opCode,Vector<String> data)
+    {
+        messageType=opCode;
+        this.data=data;
     }
 
-    public String getMessageName() {
-        return messageName;
+    public String getMessageType(){
+        return messageType;
     }
 
-    public void setMessageName(String messageName) {
-        this.messageName = messageName;
+    public Vector<String> getData(){
+        return data;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-    public void setUserName(String userName){
-        this.userName=userName;
-    }
+    @Override
+    public String toString() {
+        String[] sArray=this.data.toString().split(",");
+        for (int i=0;i<sArray.length;i++){
+            if (i==0)
+                sArray[0]=sArray[0].substring(1);
+            if(i==sArray.length-1)
+                sArray[i]=sArray[i].substring(0,sArray[i].length()-1);
+            if (i>0)
+                sArray[i]=sArray[i].substring(1);
+        }
 
-    public String getUserPassword() {
-        return userPassword;
-    }
-    public String getCourseNum(){return "2";}
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+        String acc=sArray[0];
+        for (int i=1;i<sArray.length;i++){
+            acc = acc + sArray[i]+'\0';
+        }
+        return messageType+acc;
     }
 }
