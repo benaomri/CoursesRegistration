@@ -28,7 +28,6 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
             case ("02"): { //StudentRegister
                 String user = msg.getData().elementAt(0);
                 String pass = msg.getData().elementAt(1);
-
                 if (Database.getInstance().checkIfRegister(user))
                     return errorMsg("02");
                 Database.getInstance().register(user, pass);
@@ -38,7 +37,6 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
 
             }
             case ("03"):{//Login
-
                 if (isLogin())
                     return errorMsg("03");
                 else {
@@ -75,6 +73,7 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
                         return errorMsg("05");
                     else {
                         String courseNum=msg.getData().elementAt(0);
+                        System.out.println(courseNum);
                         if (!Database.getInstance().checkIfPossibleToReg(courseNum, userName))
                             return errorMsg("05");
                         Database.getInstance().registerToCourse(userName, courseNum);

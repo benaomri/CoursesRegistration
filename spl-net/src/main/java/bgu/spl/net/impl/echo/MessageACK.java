@@ -18,7 +18,7 @@ public class MessageACK extends Message {
         super("12",data);
         this.ACKopCode=data.elementAt(0);
         if (data.size()==1)
-         this.opCodeOptional=null;
+         this.opCodeOptional="";
         else
             this.opCodeOptional=data.elementAt(1);
     }
@@ -26,11 +26,6 @@ public class MessageACK extends Message {
 
     @Override
     public String toString() {
-        if (opCodeOptional!=null)
-            return messageType+" "+ACKopCode+" "+opCodeOptional;
-        else
-            return messageType+" "+ACKopCode;
-
-
+            return messageType+ACKopCode+opCodeOptional+'\0';
     }
 }
