@@ -69,6 +69,7 @@ public class Database {
         try {
             registerMapStudent.putIfAbsent(name, new User(name, password));
         } catch (Exception e) {
+            System.out.println("Put if absent");
             return false;
         }
         return true;
@@ -92,6 +93,7 @@ public class Database {
      */
     public boolean checkIfRegister(String name)
     {
+        System.out.println(registerMapStudent.containsKey(name));
         return registerMapStudent.containsKey(name);
     }
 

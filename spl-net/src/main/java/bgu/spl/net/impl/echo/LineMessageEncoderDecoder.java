@@ -24,6 +24,7 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
      */
     public byte[] encode(Message message) {
         String op=message.getMessageType();
+        System.out.println("op in encodeing is "+op);
         if (op.equals("13")){
             short otherOP= Short.parseShort(message.getData().elementAt(0));
             return  shortToBytes(Short.parseShort(op),otherOP);
@@ -133,7 +134,14 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
 //        String result = new String(bytes, 0, len, StandardCharsets.UTF_8);
         int start=2;
         Vector<String > data=new Vector<>();
-        String OPCODE = "" + bytesToShort(bytes);
+        short getOP=bytesToShort(bytes);
+        String OPCODE;
+        if (getOP>9)
+         OPCODE = "" +getOP;
+        else
+            OPCODE="0"+getOP;
+        System.out.println("OPCODE is "+OPCODE);
+
 
         if (twoParam(OPCODE)) {
             short course = bytesToShort(bytes, 2);
@@ -162,6 +170,7 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
 
 
         String result = new String(bytes, start, len, StandardCharsets.UTF_8);
+        System.out.println(result);
         data.addAll( stringToVec(result));
         len = 0;
         return new Message(OPCODE, data);
@@ -171,7 +180,7 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
     private Vector<String> stringToVec(String str)
     {
         Vector<String> data=new Vector<>();
-        int index=2;
+        int index=0;
         String name="";
         while(index<str.length()) {
             if(str.charAt(index)=='\0') {

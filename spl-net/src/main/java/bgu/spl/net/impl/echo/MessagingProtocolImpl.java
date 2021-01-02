@@ -16,11 +16,11 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
             case ("01"): { //AdminRegister
                 String user = msg.getData().elementAt(0);
                 String pass = msg.getData().elementAt(1);
-
-                if (Database.getInstance().checkIfRegister(user)||
-                        Database.getInstance().register(user, pass))//
+                System.out.println("in 01");
+                if (Database.getInstance().checkIfRegister(user)||!Database.getInstance().register(user, pass))//
                     return errorMsg("01");
                 Database.getInstance().makeAdmin(user);
+                System.out.println("now create admin");
                 Vector<String> data = new Vector<>();
                 data.add("01");
                 return ackMsg(data);
