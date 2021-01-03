@@ -27,7 +27,7 @@ public:
         if(opToReturn =="KDAMCHECK") return 6;
         if(opToReturn =="COURSESTAT") return 7;
         if(opToReturn =="STUDENTSTAT") return 8;
-        if(opToReturn =="ISREGISTER") return 9;
+        if(opToReturn =="ISREGISTERED") return 9;
         if(opToReturn =="UNREGISTER") return 10;
         if(opToReturn =="MYCOURSES") return 11;
         if(opToReturn =="ACK") return 12;
