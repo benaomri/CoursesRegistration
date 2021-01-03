@@ -48,12 +48,14 @@ public:
         opAnswer[0]=answer.at(0);
         opAnswer[1]=answer.at(1);
         short op=bytesToShort(opAnswer);
+        opAnswer= nullptr;
 
-        char* opRespond=new char[2];
+        char*opRespond=new char[2];
         opRespond[0]=answer.at(2);
         opRespond[1]=answer.at(3);
         short respond=bytesToShort(opRespond);
         std::string toReturn="";
+        opRespond= nullptr;
 
         if(op==12){
             toReturn.append("ACK ");
@@ -97,6 +99,7 @@ public:
     {
         short result = (short)((bytesArr[0] & 0xff) << 8);
         result += (short)(bytesArr[1] & 0xff);
+        bytesArr= nullptr;
         return result;
     }
 

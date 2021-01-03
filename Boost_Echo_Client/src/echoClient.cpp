@@ -50,6 +50,7 @@ int main (int argc, char *argv[]) {
                 break;
             }
 //            std::cout << "Sent " << len+1 << " bytes to server" << std::endl;
+        line.clear();
         }
 ////		 connectionHandler.sendLine(line) appends '\n' to the message. Therefor we send len+1 bytes.
 
