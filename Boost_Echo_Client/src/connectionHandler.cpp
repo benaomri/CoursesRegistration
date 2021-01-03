@@ -113,17 +113,14 @@ bool ConnectionHandler::getFrameAscii(std::string& frame, char delimiter) {
 		if(!getBytes(&ch, 1))
 			return false;
 
-		if(ch!='\0')
-			frame.append(1, ch);
-		else
-            frame.append(1, ch);
-        getOPC++;
-        if(getOPC==4){
+		frame.append(1, ch);
+        if(getOPC==3){
             if(frame.at(1)!='\f')
                 ch='\0';
         }
+        getOPC++;
 
-	}while ((delimiter != ch)|((getOPC>0)&(getOPC<4)));
+	}while ((getOPC<4)|(delimiter != ch));
     } catch (std::exception& e) {
 	std::cerr << "recv failed2 (Error: " << e.what() << ')' << std::endl;
 	return false;
@@ -131,7 +128,7 @@ bool ConnectionHandler::getFrameAscii(std::string& frame, char delimiter) {
     return true;
 }
  
- 
+
 bool ConnectionHandler::sendFrameAscii(const std::string& frame, char delimiter) {
     EncoderDecoder c;
     short opCode=c.opcodeToSend(frame);
