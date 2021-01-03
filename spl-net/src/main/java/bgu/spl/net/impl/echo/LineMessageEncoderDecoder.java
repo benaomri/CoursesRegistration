@@ -43,6 +43,7 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         System.out.println("-----NOW IN ACKBYTE-------");
         System.out.println(msg.toString());
         String optional=msg.toString().substring(4)+'\0';
+        System.out.println(optional);
         System.out.println("OPTINAL IS");
         System.out.println(optional);
         byte[] string=optional.getBytes();
