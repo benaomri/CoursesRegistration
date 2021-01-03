@@ -1,5 +1,6 @@
 package bgu.spl.net.srv;
 
+import bgu.spl.net.impl.echo.LineMessageEncoderDecoder;
 import bgu.spl.net.impl.echo.Message;
 import bgu.spl.net.impl.echo.MessageEncoderDecoder;
 import bgu.spl.net.impl.echo.MessagingProtocolImpl;
@@ -10,7 +11,7 @@ public class MainReactor {
         Database.getInstance().initialize("/home/spl211/IdeaProjects/CoursesRegistration/spl-net/src/main/java/bgu/spl/net/srv/Courses.txt");
         new Reactor(1, 7776,
                 () -> new MessagingProtocolImpl(),
-                MessageEncoderDecoder::new).serve();
+               LineMessageEncoderDecoder::new).serve();
 
 //        Server.reactor(
 //                Runtime.getRuntime().availableProcessors(),

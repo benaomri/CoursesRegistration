@@ -6,7 +6,6 @@ import bgu.spl.net.impl.echo.MessageACK;
 import bgu.spl.net.impl.echo.MessageErr;
 import bgu.spl.net.srv.Database;
 
-import java.io.Serializable;
 import java.util.Vector;
 
 public class RemoteCommandInvocationProtocol<T> implements MessagingProtocol<Message> {
@@ -109,7 +108,7 @@ public class RemoteCommandInvocationProtocol<T> implements MessagingProtocol<Mes
             case ("07"): {//"COURSESTAT"
                 if (isLogin()&&isAdmin) {
                     String course=msg.getData().elementAt(0);
-                    if (Database.getInstance().checkIfcourseExist(course))
+                    if (Database.getInstance().checkIfCourseExist(course))
                         return errorMsg("07");
                     Vector<String> data=new Vector<>();
                     data.add("07");
@@ -190,7 +189,7 @@ public class RemoteCommandInvocationProtocol<T> implements MessagingProtocol<Mes
                 Database.getInstance().isLogin(userName);
     }
     public boolean checkCourseExist(String courseNum){
-        return Database.getInstance().checkIfcourseExist(courseNum);
+        return Database.getInstance().checkIfCourseExist(courseNum);
     }
 
     public  boolean isLogin(){

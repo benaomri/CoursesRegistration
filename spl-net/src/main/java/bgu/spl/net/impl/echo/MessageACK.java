@@ -26,6 +26,6 @@ public class MessageACK extends Message {
 
     @Override
     public String toString() {
-            return messageType+ACKopCode+opCodeOptional+'\0';
+            return messageType+ACKopCode+opCodeOptional;
     }
 }
