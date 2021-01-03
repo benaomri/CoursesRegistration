@@ -137,7 +137,7 @@ bool ConnectionHandler::sendFrameAscii(const std::string& frame, char delimiter)
     short opCode=c.opcodeToSend(frame);
     char* numberChar =new char[2];
     shortToBytes(opCode,numberChar);
-    std::cout<<numberChar[1]<<std::endl;
+
     bool result= sendBytes(numberChar,2);
     if(result&&(opCode==1||opCode==2||opCode==3||opCode==8)){
         std::string subFrame=frame.substr(frame.find_first_of(' ')+1);
@@ -155,7 +155,7 @@ bool ConnectionHandler::sendFrameAscii(const std::string& frame, char delimiter)
     if(result&&(opCode==4||opCode==11||opCode==13))
         return true;
     if (result&&(opCode==5||opCode==6||opCode==7||opCode==9||opCode==10)){//handdle course reg
-        std::string courseNum=frame.substr(frame.find_first_of(' '));
+        std::string courseNum=frame.substr(frame.find_first_of(' ')+1);
         short shortCourseNum = boost::lexical_cast<short>(courseNum);//change string to short
         c.shortToBytes(shortCourseNum,numberChar);
         return  sendBytes(numberChar,2);

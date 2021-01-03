@@ -76,7 +76,7 @@ public:
      bool printAnswer(std::string answer){
          if (answer.substr(0,3) == "ACK") {
              std::cout << answer << std::endl;
-             if(answer.substr(4)=="04") {//check if suppose to logOut
+             if(answer.substr(4)=="4") {//check if suppose to logOut
                  std::cout << "Exiting...\n" << std::endl;
                  return true;
              }
