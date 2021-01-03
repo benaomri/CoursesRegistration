@@ -78,6 +78,10 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
 
         }
         i++;
+
+        if (OPCODE.equals("13"))
+            return new Message("13",new Vector<>());
+
         return null; //not a line yet
     }
 
@@ -91,7 +95,9 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
             if (len <= 2)
                 return false;
             else {
-                if (twoParam(OPCODE)) {
+                if (OPCODE.equals("13"))
+                    return false;
+                else if (twoParam(OPCODE)) {
                     System.out.println("Now in two param in stopTORead");
                     System.out.println("CHECK IF len == 4 "+(len == 4));
                     return len == 4;
@@ -121,11 +127,13 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         if (len >= bytes.length) {
             bytes = Arrays.copyOf(bytes, len * 2);
         }
+        bytes[len++] = nextByte;
         //Setting the expected finishing code
         if (len==2) {
             System.out.println("In len==2 ");
             byte[] op={bytes[0],bytes[1]};
             short newOP=bytesToShort(op);
+            System.out.println(newOP);
             if (newOP>9)
                 OPCODE =""+newOP;
             else
@@ -141,7 +149,6 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
             System.out.println("numOfByteToRead IZ "+numOfByteToRead);
 
         }
-        bytes[len++] = nextByte;
 
     }
     private  boolean NumOfZeros(){
