@@ -60,8 +60,8 @@ public:
             toReturn.append("ACK ");
             toReturn+=std::to_string(respond);
             std::cout <<"ANSWER LENGTH: "<< answer.length() << std::endl;
-            std::cout <<"subANSWER LENGTH: "<< answer.substr(5).length() << std::endl;
-            toReturn.append(answer.substr(5));
+            std::cout <<"subANSWER LENGTH: "<< answer.substr(4).length() << std::endl;
+            toReturn.append(answer.substr(4));
             return toReturn  ;
          }
          else {
