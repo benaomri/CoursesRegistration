@@ -156,8 +156,12 @@ bool ConnectionHandler::sendFrameAscii(const std::string& frame, char delimiter)
         return true;
     if (result&&(opCode==5||opCode==6||opCode==7||opCode==9||opCode==10)){//handdle course reg
         std::string courseNum=frame.substr(frame.find_first_of(' ')+1);
+        std::cout<<"Course num before: "<<courseNum<<std::endl;
         short shortCourseNum = boost::lexical_cast<short>(courseNum);//change string to short
+        std::cout<<"Course num after: "<<shortCourseNum<<std::endl;
         c.shortToBytes(shortCourseNum,numberChar);
+        std::cout<<"Course num in bytes: "<<numberChar[0]<<","<<numberChar[1]<<std::endl;
+        std::cout<<"Course num in short: "<<c.bytesToShort(numberChar)<<std::endl;
         return  sendBytes(numberChar,2);
 
     }

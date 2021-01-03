@@ -56,8 +56,11 @@ public:
         std::string toReturn="";
 
         if(op==12){
+            std::cout <<"--Create ACK data----"<< std::endl;
             toReturn.append("ACK ");
             toReturn+=std::to_string(respond);
+            std::cout <<"ANSWER LENGTH: "<< answer.length() << std::endl;
+            std::cout <<"subANSWER LENGTH: "<< answer.substr(5).length() << std::endl;
             toReturn.append(answer.substr(5));
             return toReturn  ;
          }
