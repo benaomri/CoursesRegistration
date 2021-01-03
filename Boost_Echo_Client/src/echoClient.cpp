@@ -94,6 +94,7 @@ int main (int argc, char *argv[]) {
         }
 
     }
+    threadReader.detach();
     return 0;
 }
 

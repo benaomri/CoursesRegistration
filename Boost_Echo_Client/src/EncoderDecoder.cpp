@@ -56,11 +56,8 @@ public:
         std::string toReturn="";
 
         if(op==12){
-            std::cout <<"--Create ACK data----"<< std::endl;
             toReturn.append("ACK ");
             toReturn+=std::to_string(respond);
-            std::cout <<"ANSWER LENGTH: "<< answer.length() << std::endl;
-            std::cout <<"subANSWER LENGTH: "<< answer.substr(4).length() << std::endl;
             if(answer.substr(4).length()>1)
                 toReturn.append(answer.substr(4,answer.length()-2));
             return toReturn  ;
@@ -78,20 +75,14 @@ public:
       * return true if suppose to logout
       */
      bool printAnswer(std::string answer){
-
-         std::cout << "NOW IN printAnswer " << answer << std::endl;
+         std::cout << answer << std::endl;
 
          if (answer.substr(0,3) == "ACK") {
-             std::cout << "in ACK" << std::endl;
-             std::cout <<(answer.substr(4).compare("4")==0)<< answer.substr(5)<< std::endl;
-             std::cout << "sub4:"<< answer.substr(4).length()<< std::endl;
-
              if(!answer.substr(4).compare("4")) {//check if suppose to logOut
                  std::cout << "Exiting...\n" << std::endl;
                  return true;
              }
          }else{
-             std::cout << answer << std::endl;
              return false;
          }
     }
