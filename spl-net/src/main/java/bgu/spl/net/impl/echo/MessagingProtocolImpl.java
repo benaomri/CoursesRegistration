@@ -41,7 +41,6 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
 
             }
             case ("03"):{//Login
-
                 if (!isLogin()) {//check if is not login
                     String user = msg.getData().elementAt(0);
                     String pass = msg.getData().elementAt(1);

@@ -196,14 +196,12 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
                 d.add("" + course);
             else
                 d.add("0" + course);
-            i=0;
-            len = 0;
+            reINIT();
             return new Message(OPCODE, d);
 
         }
         else if (oneParam(OPCODE)) {
-            i=0;
-            len = 0;
+            reINIT();
             return new Message(OPCODE, new Vector<>());
         }
         else if (OPCODE.equals("12")){
@@ -220,12 +218,16 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         String result = new String(bytes, start, len, StandardCharsets.UTF_8);
         System.out.println(result);
         data.addAll( stringToVec(result));
-        i=0;
-        len = 0;
-
+        reINIT();
         return new Message(OPCODE, data);
 
 
+    }
+    private void reINIT()
+    {
+        i=0;
+        len = 0;
+        bytes = new byte[1 << 10];
     }
     private Vector<String> stringToVec(String str)
     {
