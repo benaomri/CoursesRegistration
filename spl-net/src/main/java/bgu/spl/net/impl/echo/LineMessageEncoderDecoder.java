@@ -43,19 +43,16 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         System.out.println("-----NOW IN ACKBYTE-------");
         System.out.println(msg.toString());
         String optional=msg.toString().substring(4)+'\0';
-        System.out.println(optional);
         System.out.println("OPTINAL IS");
         System.out.println(optional);
-        byte[] string=optional.getBytes();
+        byte[] optionalInBytes=optional.getBytes();
         short op= Short.parseShort(msg.getData().elementAt(0));
         byte[] opCodes=shortToBytes((short) 12,op);
-        byte[] toReturn=new byte[opCodes.length+string.length];
-        for (int i=0;i<toReturn.length;i++){
-            if(i<opCodes.length)
+        byte[] toReturn=new byte[opCodes.length+optionalInBytes.length];
+        for (int i=0;i<opCodes.length;i++)
                 toReturn[i]=opCodes[i];
-            else
-                toReturn[i]=string[toReturn.length-1-i];
-        }
+        for (int j=0;j<optionalInBytes.length;j++)
+            toReturn[j+opCodes.length]=optionalInBytes[j];
 
         return  toReturn;
     }

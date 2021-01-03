@@ -101,7 +101,7 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
                     String course=msg.getData().elementAt(0);
                     Vector<String> data=new Vector<>();
                     data.add("06");
-                    data.add(Database.getInstance().getKdam(course).toString());
+                    data.add("\n"+Database.getInstance().getKdam(course).toString());
                     return ackMsg(data);
                 }
                 else
