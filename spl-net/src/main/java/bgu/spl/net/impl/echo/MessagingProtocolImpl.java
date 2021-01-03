@@ -17,6 +17,8 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
         System.out.println(msg.getMessageType());
         switch (msg.getMessageType()) {
             case ("01"): { //AdminRegister
+                if (isLogin())
+                    return errorMsg("01");
                 String user = msg.getData().elementAt(0);
                 String pass = msg.getData().elementAt(1);
                 System.out.println("in 01");
@@ -29,6 +31,8 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
                 return ackMsg(data);
             }
             case ("02"): { //StudentRegister
+                if (isLogin())
+                    return errorMsg("02");
                 String user = msg.getData().elementAt(0);
                 String pass = msg.getData().elementAt(1);
 

@@ -146,6 +146,7 @@ public class Database {
         return  checkIfcourseExist(courseNum)&&//check course exist in the dataBase
                 checkSpaceInCourse(courseNum)&&///check course has space
                 checkKdam(courseNum, userName);//checking that the student has all the kdam courses
+
     }
 
     /**
@@ -174,7 +175,8 @@ public class Database {
      * @return true if userName has all the kdam course for the courseNum
      */
     public boolean checkKdam(String courseNum,String userName){//checking that the student has all the kdam courses
-        return registerMapStudent.get(userName).KdamCourses.containsAll(coursesMap.get(courseNum).KdamCoursesList);
+        return   !registerMapStudent.get(userName).KdamCourses.contains(courseNum)&&
+                  registerMapStudent.get(userName).KdamCourses.containsAll(coursesMap.get(courseNum).KdamCoursesList);
         }
 
 
