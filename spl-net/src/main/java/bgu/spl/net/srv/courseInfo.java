@@ -33,11 +33,21 @@ public class courseInfo {
     public Vector<String> getKdamCorseList() {
         return KdamCoursesList;
     }
-    public void regStudent(String studentName){
+
+    /**
+     *
+     * @param studentName
+     */
+    public synchronized void regStudent(String studentName){
        studentsRegToCourse.add(studentName);
        numOfLeftSeats--;
     }
-    public void unregStudent(String studentName){
+
+    /**
+     *
+     * @param studentName
+     */
+    public synchronized void unregStudent(String studentName){
         studentsRegToCourse.removeElement(studentName);
         numOfLeftSeats++;
     }

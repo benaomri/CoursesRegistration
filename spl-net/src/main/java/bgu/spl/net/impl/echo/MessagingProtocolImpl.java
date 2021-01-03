@@ -16,11 +16,11 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
             case ("01"): { //AdminRegister
                 String user = msg.getData().elementAt(0);
                 String pass = msg.getData().elementAt(1);
-
-                if (Database.getInstance().checkIfRegister(user))
+                System.out.println("in 01");
+                if (Database.getInstance().checkIfRegister(user)||!Database.getInstance().register(user, pass))//
                     return errorMsg("01");
-                Database.getInstance().register(user, pass);
                 Database.getInstance().makeAdmin(user);
+                System.out.println("now create admin");
                 Vector<String> data = new Vector<>();
                 data.add("01");
                 return ackMsg(data);
@@ -28,6 +28,7 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
             case ("02"): { //StudentRegister
                 String user = msg.getData().elementAt(0);
                 String pass = msg.getData().elementAt(1);
+
                 if (Database.getInstance().checkIfRegister(user))
                     return errorMsg("02");
                 Database.getInstance().register(user, pass);
@@ -37,21 +38,23 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
 
             }
             case ("03"):{//Login
-                if (isLogin())
-                    return errorMsg("03");
-                else {
+
+                if (!isLogin()) {//check if is not login
                     String user = msg.getData().elementAt(0);
                     String pass = msg.getData().elementAt(1);
 
                     if (!Database.getInstance().checkIfRegister(user)||!Database.getInstance().checkPassword(user,pass))
-                        return errorMsg("03");
+                        return errorMsg("03");//return err if is not register or wrong password
                     Database.getInstance().login(user);
-                    userName = user;
-                    isAdmin = Database.getInstance().isAdmin(user);
-                    Vector<String> data = new Vector<>();
-                    data.add("03");
-                    return ackMsg(data);
+                    if (Database.getInstance().isLogin(user)) {//check if he succeed to login
+                        userName = user;
+                        isAdmin = Database.getInstance().isAdmin(user);
+                        Vector<String> data = new Vector<>();
+                        data.add("03");
+                        return ackMsg(data);
+                    }
                 }
+                return errorMsg("03");
             }
             case ("04"): {//LogOut
                 if(isLogin()) {
@@ -73,7 +76,6 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
                         return errorMsg("05");
                     else {
                         String courseNum=msg.getData().elementAt(0);
-                        System.out.println(courseNum);
                         if (!Database.getInstance().checkIfPossibleToReg(courseNum, userName))
                             return errorMsg("05");
                         Database.getInstance().registerToCourse(userName, courseNum);

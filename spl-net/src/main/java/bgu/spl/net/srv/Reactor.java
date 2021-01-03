@@ -60,7 +60,9 @@ public class Reactor<T> implements Server<T> {
                     } else if (key.isAcceptable()) {
                         handleAccept(serverSock, selector);
                     } else {
+                        System.out.println("key read write");
                         handleReadWrite(key);
+                        System.out.println("readWrite");
                     }
                 }
 
@@ -93,6 +95,7 @@ public class Reactor<T> implements Server<T> {
 
 
     private void handleAccept(ServerSocketChannel serverChan, Selector selector) throws IOException {
+        System.out.println("handle accept");
         SocketChannel clientChan = serverChan.accept();
         clientChan.configureBlocking(false);
         final NonBlockingConnectionHandler<T> handler = new NonBlockingConnectionHandler<>(

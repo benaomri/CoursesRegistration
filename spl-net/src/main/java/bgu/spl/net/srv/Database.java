@@ -1,6 +1,7 @@
 package bgu.spl.net.srv;
 
 import java.util.Scanner;
+import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 import java.io.*;
 
@@ -37,9 +38,8 @@ public class Database {
      * loades the courses from the file path specified
      * into the Database, returns true if successful.
      */
-    boolean initialize(String coursesFilePath)  {
+    public boolean initialize(String coursesFilePath)  {
         File file=new File(coursesFilePath);
-//        BufferedReader bufferedReader=new BufferedReader(new FileReader(file));
       try {
           Scanner scanner=new Scanner(file);
           while (scanner.hasNextLine()){
@@ -53,13 +53,9 @@ public class Database {
                   return false;
               }
           }
-
       }catch (FileNotFoundException e){
           return false;
       }
-
-
-
         return true;
     }
 
@@ -67,16 +63,24 @@ public class Database {
      *
      * @param name
      * @param password
+     * @return true if register the student
      */
-    public void register(String name,String password){
-        registerMapStudent.putIfAbsent(name,new User(name,password));
+    public boolean register(String name,String password) {
+        try {
+            registerMapStudent.putIfAbsent(name, new User(name, password));
+        } catch (Exception e) {
+            System.out.println("Put if absent");
+            return false;
+        }
+        return true;
     }
+
 
     /**
      *
      * @param name
-     * @return
-     * @throws Exception
+     * @param Pass
+     * @return true if is the same password
      */
     public boolean checkPassword(String name,String Pass) {
         return registerMapStudent.get(name).userPassword.equals(Pass);
@@ -85,19 +89,21 @@ public class Database {
     /**
      *
      * @param name
-     * @return
+     * @return true if the user is register
      */
     public boolean checkIfRegister(String name)
     {
+        System.out.println(registerMapStudent.containsKey(name));
         return registerMapStudent.containsKey(name);
     }
 
     /**
      *
      * @param name
+     * change login status to true if the user is not login
      */
-    public void login(String name){
-        registerMapStudent.get(name).login=true;
+    public synchronized void login(String name){
+        registerMapStudent.get(name).login=!isLogin(name);
     }
 
     /**
@@ -122,8 +128,11 @@ public class Database {
      *
      * @param name
      */
-    public void isAdmin(String name){
+    public void makeAdmin(String name){
         registerMapStudent.get(name).isAdmin=true;
+    }
+    public boolean isAdmin(String name){
+        return registerMapStudent.get(name).isAdmin;
     }
 
     /**
@@ -133,8 +142,8 @@ public class Database {
      * @return if its pissible to register to course
      */
     public boolean checkIfPossibleToReg(String courseNum,String userName){
-        return  isLogin(userName)&&//check user is logIn
-                checkIfcourseExist(courseNum)&&//check course exist in the dataBase
+
+        return  checkIfcourseExist(courseNum)&&//check course exist in the dataBase
                 checkSpaceInCourse(courseNum)&&///check course has space
                 checkKdam(courseNum, userName);//checking that the student has all the kdam courses
     }
@@ -147,6 +156,12 @@ public class Database {
     public boolean checkIfcourseExist(String courseNum){
         return coursesMap.containsKey(courseNum);
     }
+
+    /**
+     *
+     * @param courseNum
+     * @return true if there is space to reg t course
+     */
     public boolean checkSpaceInCourse(String courseNum){
         return coursesMap.get(courseNum).numOfLeftSeats>0;
     }
@@ -156,38 +171,82 @@ public class Database {
      *
      * @param courseNum
      * @param userName
-     * @return
+     * @return true if userName has all the kdam course for the courseNum
      */
     public boolean checkKdam(String courseNum,String userName){//checking that the student has all the kdam courses
         return registerMapStudent.get(userName).KdamCourses.containsAll(coursesMap.get(courseNum).KdamCoursesList);
-
-
         }
+
+
+    /**
+     *
+     * @param userName
+     * @param courseNumber
+     * register a student to course
+     */
+     public synchronized void registerToCourse(String userName, String courseNumber){
+         registerMapStudent.get(userName).addCourse(courseNumber);//add to the student that he did the course
+        coursesMap.get(courseNumber).regStudent(userName);
+     }
+
+    /**
+     *
+     * @param userName
+     * @param courseNumber
+     */
+    public synchronized void unregisterToCourse(String userName, String courseNumber) {
+        registerMapStudent.get(userName).removeCourse(courseNumber);
+        coursesMap.get(courseNumber).unregStudent(userName);
+    }
+
+    /**
+     *
+     * @param user
+     * @return
+     */
+    public String getMyCourse(String user){
+        return registerMapStudent.get(user).KdamCourses.toString();
+    }
 
     /**
      *
      * @param userName
      * @param courseNum
+     * @return
      */
-    public void addCourseToKdam(String userName,String courseNum){
-        registerMapStudent.get(userName).KdamCourses.add(courseNum);
-    }
-
-    /**
-     *
-     * @param courseNum
-     */
-    public void updateLeftCourse(String courseNum){
-        coursesMap.get(courseNum).numOfLeftSeats--;
-    }
     public boolean checkRegStudentToCourse(String userName,String courseNum){
         return coursesMap.get(courseNum).studentsRegToCourse.contains(userName);
     }
 
- public static void main(String[] args) {
-Database d=new Database();
-     System.out.println(d.initialize("/home/spl211/IdeaProjects/DataBase/src/Courses.txt"));
-     System.out.println(d.coursesMap.get("101").courseNum);
+    /**
+     *
+     * @param coursNum
+     * @return
+     */
+    public Vector<String> getKdam(String coursNum){
+        return coursesMap.get(coursNum).KdamCoursesList;
+    }
 
-}
+    /**
+
+     * @param course
+     * @return
+     */
+    public String courseStat(String course){
+        return coursesMap.get(course).toString();
+    }
+
+    public String studentStat(String student){
+        return registerMapStudent.get(student).toString();
+    }
+
+    @Override
+    public String toString() {
+        return "Database{" +
+                "registerMapStudent=" + registerMapStudent.toString() +
+                ", coursesMap=" + coursesMap.toString() +
+                '}';
+    }
+
+
 }

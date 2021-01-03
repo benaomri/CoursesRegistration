@@ -13,6 +13,7 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
     String OPCODE="00";
     int numOfZero=1;
     int numOfByteToRead=-1;
+    int i=0;
 
 
     /**
@@ -23,6 +24,7 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
      */
     public byte[] encode(Message message) {
         String op=message.getMessageType();
+        System.out.println("op in encodeing is "+op);
         if (op.equals("13")){
             short otherOP= Short.parseShort(message.getData().elementAt(0));
             return  shortToBytes(Short.parseShort(op),otherOP);
@@ -38,7 +40,7 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         return (op.equals("04")|op.equals("11"));
     }
     private byte[] ackByte(Message msg){
-        String optional=msg.toString().substring(5);
+        String optional=msg.toString().substring(5)+'\0';
         byte[] string=optional.getBytes();
         short op= Short.parseShort(msg.getData().elementAt(0));
         byte[] opCodes=shortToBytes((short) 12,op);
@@ -47,9 +49,7 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
             if(i<opCodes.length)
                 toReturn[i]=opCodes[i];
             else
-                toReturn[i]=string[i-string.length];
-
-
+                toReturn[i]=string[toReturn.length-1-i];
         }
 
         return  toReturn;
@@ -62,10 +62,10 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
      * @return a message if this byte completes one or null if it doesnt.
      */
     public Message decodeNextByte(byte nextByte) {
-
         //Stop argument for '\0'
-        if (nextByte == '\0'){
-            if ((numOfZero==1)&(len>0)) {
+        if ((nextByte == '\0')&(len>0)){
+            System.out.println(i);
+            if ((numOfZero==1)) {
                 return popString();
             }
             else {
@@ -75,12 +75,12 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         }
 
         pushByte(nextByte);
-
         //Stop argument for limited bytes
         if (len==numOfByteToRead){
             return popString();
 
         }
+        i++;
         return null; //not a line yet
     }
 
@@ -90,12 +90,20 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         }
         //Setting the expected finishing code
         if (len==2) {
-            OPCODE = new String(bytes, 0, len, StandardCharsets.UTF_8);
+            byte[] op={bytes[0],bytes[1]};
+            short newOP=bytesToShort(op);
+            if (newOP>9)
+             OPCODE =""+newOP;
+            else
+                OPCODE="0"+newOP;
+            System.out.println("OPCODE is "+OPCODE);
             if (NumOfZeros()) {
                 numOfZero=setNumberOfZeros();
             }
             else
                 numOfByteToRead();
+
+            System.out.println("numOfZero IZ "+numOfZero);
         }
         bytes[len++] = nextByte;
 
@@ -124,7 +132,14 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
 //        String result = new String(bytes, 0, len, StandardCharsets.UTF_8);
         int start=2;
         Vector<String > data=new Vector<>();
-        String OPCODE = "" + bytesToShort(bytes);
+        short getOP=bytesToShort(bytes);
+        String OPCODE;
+        if (getOP>9)
+         OPCODE = "" +getOP;
+        else
+            OPCODE="0"+getOP;
+        System.out.println("OPCODE is "+OPCODE);
+
 
         if (twoParam(OPCODE)) {
             short course = bytesToShort(bytes, 2);
@@ -153,6 +168,7 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
 
 
         String result = new String(bytes, start, len, StandardCharsets.UTF_8);
+        System.out.println(result);
         data.addAll( stringToVec(result));
         len = 0;
         return new Message(OPCODE, data);
@@ -162,7 +178,7 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
     private Vector<String> stringToVec(String str)
     {
         Vector<String> data=new Vector<>();
-        int index=2;
+        int index=0;
         String name="";
         while(index<str.length()) {
             if(str.charAt(index)=='\0') {
