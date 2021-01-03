@@ -9,83 +9,96 @@
 
 class EncoderDecoder{
 
-//#define ADMINREG "0001"
-//#define STUDENTREG 0002
-//#define LOGIN 0003
-//#define LOGOUT 0004
-//#define COURSEREG 0005
-//#define KDAMCHECK 0006
-//#define COURSESTAT 0007
-//#define STUDENTSTAT 0008
-//#define ISREGISTER 0009
-//#define UNREGISTER 0010
-//#define MYCOURSES 0011
-//#define ACK 0012
-//#define ERR 0013
-
 public:
-     std::string opcodeToSend(std::string messege){
-          std::cout<<"encoderdecoder"<<std::endl;
+    /**
+     *
+     * @param messege from user
+     * @return the  op code that fit to the  message if there is not op code for
+     * the message return the opcode for error.
+     */
+   short opcodeToSend(std::string messege){
         std::string opToReturn=messege.substr(0,messege.find_first_of(' '));
 
-           if(opToReturn =="ADMINREG") return "00 01";
-            if(opToReturn =="STUDENTREG") return "00 02";
-//            if(opToReturn =="LOGIN") return 03;
-//        if(opToReturn =="LOGOUT") return 04;
-//        if(opToReturn =="COURSEREG") return 05;
-//        if(opToReturn =="KDAMCHECK") return 06;
-//        if(opToReturn =="COURSESTAT") return 07;
-//        if(opToReturn =="STUDENTSTAT") return 100;
-//        if(opToReturn =="ISREGISTER") return 101;
-//        if(opToReturn =="UNREGISTER") return 10;
-//        if(opToReturn =="MYCOURSES") return 11;
-//        if(opToReturn =="ACK") return 12;
-//        if(opToReturn =="ERR") return 13;
-//            default:return "err";
-//            switch (opToReturn) {
-//            case ("ADMINREG"): return "0001";
-//            case ("STUDENTREG"): return "0002";
-//            case ("LOGIN"): return "0003";
-//            case ("LOGOUT"): return "0004";
-//            case ("COURSEREG"): return "0005";
-//            case ("KDAMCHECK"): return "0006";
-//            case ("COURSESTAT"): return "0007";
-//            case ("STUDENTSTAT"): return "0008";
-//            case ("ISREGISTER"): return "0009";
-//            case ("UNREGISTER"): return "0010";
-//            case ("MYCOURSES"): return "0011";
-//            case ("ACK"): return "0012";
-//            case ("ERR"): return "0013";
-//            default:return "err";
+           if(opToReturn =="ADMINREG") return 1 ;
+            if(opToReturn =="STUDENTREG") return 2 ;
+            if(opToReturn =="LOGIN") return 3;
+        if(opToReturn =="LOGOUT") return 4;
+        if(opToReturn =="COURSEREG") return 5;
+        if(opToReturn =="KDAMCHECK") return 6;
+        if(opToReturn =="COURSESTAT") return 7;
+        if(opToReturn =="STUDENTSTAT") return 8;
+        if(opToReturn =="ISREGISTER") return 9;
+        if(opToReturn =="UNREGISTER") return 10;
+        if(opToReturn =="MYCOURSES") return 11;
+        if(opToReturn =="ACK") return 12;
+         return 13;
+
 
         }
-        ////short to byte never use
-//    short bytesToShort(char* bytesArr)
-//    {
-//        short result = (short)((bytesArr[0] & 0xff) << 8);
-//        result += (short)(bytesArr[1] & 0xff);
-//        return result;
-//    }
+
+
 /**
  *
  * @param answer
  * @return the messege from the server after decode
+ * choose between two option: ACK and ERROR
  */
     std::string decodeOpCode( std::string& answer){
-         if(answer.substr(0,5).compare("0012")){
-             std::cout<<"answer"<<std::endl;
-            std::cout<<answer<<std::endl;
-            std::cout<<answer.substr(0,5)<<std::endl;
-            std::cout<<answer.substr(5)<<std::endl;
-            std::cout<<answer.substr(4)<<std::endl;
-            std::cout<<answer.substr(3)<<std::endl;
-             return "ACK"+answer.substr(3);
+        char* opAnswer=new char[2];
+        opAnswer[0]=answer.at(0);
+        opAnswer[1]=answer.at(1);
+        short op=bytesToShort(opAnswer);
 
+        char* opRespond=new char[2];
+        opRespond[0]=answer.at(2);
+        opRespond[1]=answer.at(3);
+        short respond=bytesToShort(opRespond);
+        std::string toReturn="";
+
+        if(op==12){
+            toReturn.append("ACK ");
+            toReturn+=std::to_string(respond);
+            toReturn.append(answer.substr(5));
+            return toReturn  ;
          }
-
-         else  return "ERROR "+answer.substr(3);
-
+         else {
+            toReturn.append("ERROR ");
+            toReturn += std::to_string(respond);
+            return toReturn;
+        }
      }
+     /**
+      *
+      * @param answer
+      * @return print the answer from server after decode
+      * return true if suppose to logout
+      */
+     bool printAnswer(std::string answer){
+         if (answer.substr(0,3) == "ACK") {
+             std::cout << answer << std::endl;
+             if(answer.substr(4)=="04") {//check if suppose to logOut
+                 std::cout << "Exiting...\n" << std::endl;
+                 return true;
+             }
+         }else{
+             std::cout << answer << std::endl;
+             return false;
+         }
+    }
+    void shortToBytes(short num, char* bytesArr)
+    {
+        bytesArr[0]=((num >> 8) & 0xFF);
+        bytesArr[1]=(num & 0xFF);
+
+
+    }
+    short bytesToShort(char* bytesArr)
+    {
+        short result = (short)((bytesArr[0] & 0xff) << 8);
+        result += (short)(bytesArr[1] & 0xff);
+        return result;
+    }
+
 
 
 
