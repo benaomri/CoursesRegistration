@@ -40,7 +40,11 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         return (op.equals("04")|op.equals("11"));
     }
     private byte[] ackByte(Message msg){
-        String optional=msg.toString().substring(5)+'\0';
+        System.out.println("-----NOW IN ACKBYTE-------");
+        System.out.println(msg.toString());
+        String optional=msg.toString().substring(4)+'\0';
+        System.out.println("OPTINAL IS");
+        System.out.println(optional);
         byte[] string=optional.getBytes();
         short op= Short.parseShort(msg.getData().elementAt(0));
         byte[] opCodes=shortToBytes((short) 12,op);
@@ -62,26 +66,57 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
      * @return a message if this byte completes one or null if it doesnt.
      */
     public Message decodeNextByte(byte nextByte) {
+        System.out.println("------------------------");
+        System.out.println("NOW IN decodeNextByte,byte number "+i);
         //Stop argument for '\0'
-        if ((nextByte == '\0')&(len>0)){
-            System.out.println(i);
-            if ((numOfZero==1)) {
-                return popString();
-            }
-            else {
-                numOfZero--;
-                OPCODE="00";
-            }
-        }
 
+        if (stopTORead(nextByte))
+            return popString();
         pushByte(nextByte);
         //Stop argument for limited bytes
         if (len==numOfByteToRead){
+            System.out.println("We now start pop because of len==numOfByteToRead=="+numOfByteToRead);
             return popString();
 
         }
         i++;
         return null; //not a line yet
+    }
+
+    private  boolean stopTORead(byte nextByte) {
+        System.out.println("-----STOPTOREAD--------");
+        System.out.println("OPCODE IN: "+OPCODE);
+        System.out.println("LEN IN: "+len);
+        System.out.println("NUMOFZERO IN: "+OPCODE);
+
+        try {
+            if (len <= 2)
+                return false;
+            else {
+                if (twoParam(OPCODE)) {
+                    System.out.println("Now in two param in stopTORead");
+                    System.out.println("CHECK IF len == 4 "+(len == 4));
+                    return len == 4;
+                }
+                else if (oneParam(OPCODE))
+                    return len == 2;
+                else if(nextByte == '\0'){
+                    if (numOfZero == 1)
+                        return true;
+                    else {
+                        numOfZero--;
+                        OPCODE="00";
+                        return false;
+                    }
+                }
+                else
+                    return false;
+            }
+        }
+        finally {
+            System.out.println("NOW FINISHING NEEDTOSTOP");
+        }
+
     }
 
     private void pushByte(byte nextByte) {
@@ -90,10 +125,11 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         }
         //Setting the expected finishing code
         if (len==2) {
+            System.out.println("In len==2 ");
             byte[] op={bytes[0],bytes[1]};
             short newOP=bytesToShort(op);
             if (newOP>9)
-             OPCODE =""+newOP;
+                OPCODE =""+newOP;
             else
                 OPCODE="0"+newOP;
             System.out.println("OPCODE is "+OPCODE);
@@ -104,6 +140,8 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
                 numOfByteToRead();
 
             System.out.println("numOfZero IZ "+numOfZero);
+            System.out.println("numOfByteToRead IZ "+numOfByteToRead);
+
         }
         bytes[len++] = nextByte;
 
@@ -130,29 +168,36 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         //notice that we explicitly requesting that the string will be decoded from UTF-8
         //this is not actually required as it is the default encoding in java.
 //        String result = new String(bytes, 0, len, StandardCharsets.UTF_8);
+
+        System.out.println("-----Start POP string----");
         int start=2;
         Vector<String > data=new Vector<>();
         short getOP=bytesToShort(bytes);
         String OPCODE;
         if (getOP>9)
-         OPCODE = "" +getOP;
+            OPCODE = "" +getOP;
         else
             OPCODE="0"+getOP;
         System.out.println("OPCODE is "+OPCODE);
 
 
         if (twoParam(OPCODE)) {
+            System.out.println("IN 2 param "+OPCODE);
             short course = bytesToShort(bytes, 2);
+            System.out.println("Short course we get is "+course);
+            System.out.println("We expect "+Arrays.toString(shortToBytes((short) 101)));
             Vector<String> d = new Vector<>();
             if(course>9)
                 d.add("" + course);
             else
                 d.add("0" + course);
+            i=0;
             len = 0;
             return new Message(OPCODE, d);
 
         }
         else if (oneParam(OPCODE)) {
+            i=0;
             len = 0;
             return new Message(OPCODE, new Vector<>());
         }
@@ -170,7 +215,9 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         String result = new String(bytes, start, len, StandardCharsets.UTF_8);
         System.out.println(result);
         data.addAll( stringToVec(result));
+        i=0;
         len = 0;
+
         return new Message(OPCODE, data);
 
 
@@ -202,6 +249,9 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
     }
     public static short bytesToShort(byte[] byteArr,int i)
     {
+        System.out.println("In bytes to short");
+        System.out.println("START PRINT ALL BYTES--");
+        System.out.println(Arrays.toString(byteArr));
         short result = (short)((byteArr[i] & 0xff) << 8);
         result += (short)(byteArr[i+1] & 0xff);
         return result;

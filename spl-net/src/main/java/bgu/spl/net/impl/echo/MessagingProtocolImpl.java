@@ -3,6 +3,8 @@ package bgu.spl.net.impl.echo;
 import bgu.spl.net.api.MessagingProtocol;
 import bgu.spl.net.srv.Database;
 
+
+
 import java.util.Vector;
 
 public class MessagingProtocolImpl implements MessagingProtocol<Message> {
@@ -12,6 +14,7 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
 
     @Override
     public Message process( Message msg) {
+        System.out.println(msg.getMessageType());
         switch (msg.getMessageType()) {
             case ("01"): { //AdminRegister
                 String user = msg.getData().elementAt(0);
@@ -72,12 +75,16 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
             }
             case ("05"): {//RegisterCourse
                 if (isLogin()) {
-                    if (isAdmin)
+                    if (isAdmin) {
+                        System.out.println("is admin op code 5");
                         return errorMsg("05");
-                    else {
+                    }else {
                         String courseNum=msg.getData().elementAt(0);
-                        if (!Database.getInstance().checkIfPossibleToReg(courseNum, userName))
+                        System.out.println("course num at op 5 is "+courseNum);
+                        if (!Database.getInstance().checkIfPossibleToReg(courseNum, userName)) {
+                            System.out.println("checkIfPossibleTo reg"+Database.getInstance().checkIfPossibleToReg(courseNum, userName));
                             return errorMsg("05");
+                        }
                         Database.getInstance().registerToCourse(userName, courseNum);
                         Vector<String> data=new Vector<>();
                         data.add("05");
@@ -117,6 +124,7 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
             case ("08"): {//STUDENTSTAT
                 if (isLogin()&&isAdmin) {
                     String student=msg.getData().elementAt(0);
+                    System.out.println("in op 08 student name is"+student);
                     Vector<String> data=new Vector<>();
                     data.add("08");
                     data.add("\n"+Database.getInstance().studentStat(student));
