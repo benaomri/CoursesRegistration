@@ -139,9 +139,9 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
                     Vector<String> data=new Vector<>();
                     data.add("09");
                     if (Database.getInstance().checkRegStudentToCourse(userName,course))
-                        data.add("REGISTERED");
+                        data.add("\nREGISTERED");
                     else
-                        data.add("NOT REGISTERED");
+                        data.add("\nNOT REGISTERED");
                     return ackMsg(data);
                 }
                 else
@@ -163,7 +163,7 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
                 if (isLogin() && !isAdmin) {
                     Vector<String> data=new Vector<>();
                     data.add("11");
-                    data.add(Database.getInstance().getMyCourse(userName));
+                    data.add("\n"+Database.getInstance().getMyCourse(userName));
                     return ackMsg(data);
                 } else
                     return errorMsg("11");
