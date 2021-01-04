@@ -4,7 +4,7 @@ import bgu.spl.net.impl.echo.*;
 
 import javax.xml.crypto.Data;
 
-import static org.junit.Assert.*;
+
 
 import java.util.Vector;
 
@@ -13,14 +13,9 @@ public class Test {
     static MessagingProtocolImpl prot = new MessagingProtocolImpl();
 
     public static void main(String[] args) {
-
-
-
-
         Database.getInstance().initialize("/home/spl211/IdeaProjects/CoursesRegistration/spl-net/src/main/java/bgu/spl/net/srv/Courses.txt");
         Vector<String> data=new Vector<>();
 
-        //Student
 
 
 
