@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.Vector;
 
 public class courseInfo {
+    int id;
     String courseNum;
     String courseName;
     Vector<String> KdamCoursesList;
@@ -12,7 +13,8 @@ public class courseInfo {
     int numOfLeftSeats;
     Vector<String> studentsRegToCourse;
 
-   public courseInfo(String courseNum,String courseName,Vector<String> kdamCoursesList,int numOfMaxStudents){
+   public courseInfo(int id,String courseNum,String courseName,Vector<String> kdamCoursesList,int numOfMaxStudents){
+       this.id=id;
        this.courseNum=courseNum;
        this.courseName=courseName;
        this.KdamCoursesList=kdamCoursesList;
@@ -50,6 +52,10 @@ public class courseInfo {
     public synchronized void unregStudent(String studentName){
         studentsRegToCourse.removeElement(studentName);
         numOfLeftSeats++;
+    }
+    public int getId()
+    {
+        return id;
     }
 
 

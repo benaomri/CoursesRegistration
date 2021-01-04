@@ -39,6 +39,7 @@ public class Database {
      * into the Database, returns true if successful.
      */
     public boolean initialize(String coursesFilePath)  {
+        int id=0;
         File file=new File(coursesFilePath);
       try {
           Scanner scanner=new Scanner(file);
@@ -46,8 +47,9 @@ public class Database {
               String line =scanner.nextLine();
               try {
                   CheckinputTxt checkedLine=new CheckinputTxt(line);
-                  courseInfo courseFromLine=new courseInfo(checkedLine.getCourseNum(),checkedLine.getCourseName(),checkedLine.getKdamCorseList(),checkedLine.getNumOfMaxStudents());
+                  courseInfo courseFromLine=new courseInfo(id,checkedLine.getCourseNum(),checkedLine.getCourseName(),checkedLine.getKdamCorseList(),checkedLine.getNumOfMaxStudents());
                   coursesMap.putIfAbsent(courseFromLine.courseNum,courseFromLine);
+                  id++;
 
               }catch (Exception e){
                   return false;
@@ -247,6 +249,11 @@ public class Database {
                 "registerMapStudent=" + registerMapStudent.toString() +
                 ", coursesMap=" + coursesMap.toString() +
                 '}';
+    }
+
+
+    public courseInfo getCourse(String course){
+        return coursesMap.get(course);
     }
 
 
