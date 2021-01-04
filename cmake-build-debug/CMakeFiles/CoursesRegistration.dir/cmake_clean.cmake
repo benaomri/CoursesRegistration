@@ -1,5 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/AnotherCleint.cpp.o"
   "CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/EncoderDecoder.cpp.o"
   "CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/Task.cpp.o"
   "CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/connectionHandler.cpp.o"

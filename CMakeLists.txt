@@ -9,5 +9,4 @@ add_executable(CoursesRegistration
         Boost_Echo_Client/src/echoClient.cpp
         /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/Task.cpp
         /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/EncoderDecoder.cpp
-        /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/AnotherCleint.cpp
         )

@@ -84,9 +84,6 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/AnotherCleint.cpp">
-			<Option target="CoursesRegistration"/>
-		</Unit>
 		<Unit filename="/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/EncoderDecoder.cpp">
 			<Option target="CoursesRegistration"/>
 		</Unit>

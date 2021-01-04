@@ -19,9 +19,9 @@ public:
    short opcodeToSend(std::string messege){
         std::string opToReturn=messege.substr(0,messege.find_first_of(' '));
 
-           if(opToReturn =="ADMINREG") return 1 ;
-            if(opToReturn =="STUDENTREG") return 2 ;
-            if(opToReturn =="LOGIN") return 3;
+        if(opToReturn =="ADMINREG") return 1 ;
+        if(opToReturn =="STUDENTREG") return 2 ;
+        if(opToReturn =="LOGIN") return 3;
         if(opToReturn =="LOGOUT") return 4;
         if(opToReturn =="COURSEREG") return 5;
         if(opToReturn =="KDAMCHECK") return 6;
@@ -31,7 +31,7 @@ public:
         if(opToReturn =="UNREGISTER") return 10;
         if(opToReturn =="MYCOURSES") return 11;
         if(opToReturn =="ACK") return 12;
-         return 13;
+        return 13;
 
 
         }

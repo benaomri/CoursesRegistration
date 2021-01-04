@@ -143,33 +143,6 @@ CoursesRegistration/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/build
 .PHONY : CoursesRegistration/fast
 
-Boost_Echo_Client/src/AnotherCleint.o: Boost_Echo_Client/src/AnotherCleint.cpp.o
-
-.PHONY : Boost_Echo_Client/src/AnotherCleint.o
-
-# target to build an object file
-Boost_Echo_Client/src/AnotherCleint.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/AnotherCleint.cpp.o
-.PHONY : Boost_Echo_Client/src/AnotherCleint.cpp.o
-
-Boost_Echo_Client/src/AnotherCleint.i: Boost_Echo_Client/src/AnotherCleint.cpp.i
-
-.PHONY : Boost_Echo_Client/src/AnotherCleint.i
-
-# target to preprocess a source file
-Boost_Echo_Client/src/AnotherCleint.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/AnotherCleint.cpp.i
-.PHONY : Boost_Echo_Client/src/AnotherCleint.cpp.i
-
-Boost_Echo_Client/src/AnotherCleint.s: Boost_Echo_Client/src/AnotherCleint.cpp.s
-
-.PHONY : Boost_Echo_Client/src/AnotherCleint.s
-
-# target to generate assembly for a file
-Boost_Echo_Client/src/AnotherCleint.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/AnotherCleint.cpp.s
-.PHONY : Boost_Echo_Client/src/AnotherCleint.cpp.s
-
 Boost_Echo_Client/src/EncoderDecoder.o: Boost_Echo_Client/src/EncoderDecoder.cpp.o
 
 .PHONY : Boost_Echo_Client/src/EncoderDecoder.o
@@ -287,9 +260,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... CoursesRegistration"
-	@echo "... Boost_Echo_Client/src/AnotherCleint.o"
-	@echo "... Boost_Echo_Client/src/AnotherCleint.i"
-	@echo "... Boost_Echo_Client/src/AnotherCleint.s"
 	@echo "... Boost_Echo_Client/src/EncoderDecoder.o"
 	@echo "... Boost_Echo_Client/src/EncoderDecoder.i"
 	@echo "... Boost_Echo_Client/src/EncoderDecoder.s"

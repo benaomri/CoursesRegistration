@@ -43,12 +43,15 @@ int main (int argc, char *argv[]) {
 
         if(!readFromKey.messegeQueue.empty()) {
             std::string line = readFromKey.messegeQueue.front();
+            std::cout <<"Line is: " <<line << std::endl;
             readFromKey.messegeQueue.pop();
              len = line.length();
             if (!connectionHandler.sendLine(line)) {
                 std::cout << "Disconnected. Exiting...\n" << std::endl;
                 break;
             }
+            std::cout << line << std::endl;
+
 //            std::cout << "Sent " << len+1 << " bytes to server" << std::endl;
         line.clear();
         }

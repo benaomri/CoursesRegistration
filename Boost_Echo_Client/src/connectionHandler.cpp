@@ -12,28 +12,28 @@ using std::cout;
 using std::cerr;
 using std::endl;
 using std::string;
- /**
-  *
-  * @param host
-  * @param port
-  */
+/**
+ *
+ * @param host
+ * @param port
+ */
 ConnectionHandler::ConnectionHandler(string host, short port): host_(host), port_(port), io_service_(), socket_(io_service_){}
-    /**
-     *
-     */
+/**
+ *
+ */
 ConnectionHandler::~ConnectionHandler() {
     close();
 }
- 
+
 bool ConnectionHandler::connect() {
-    std::cout << "Starting connect to " 
-        << host_ << ":" << port_ << std::endl;
+    std::cout << "Starting connect to "
+              << host_ << ":" << port_ << std::endl;
     try {
-		tcp::endpoint endpoint(boost::asio::ip::address::from_string(host_), port_); // the server endpoint
-		boost::system::error_code error;
-		socket_.connect(endpoint, error);
-		if (error)
-			throw boost::system::system_error(error);
+        tcp::endpoint endpoint(boost::asio::ip::address::from_string(host_), port_); // the server endpoint
+        boost::system::error_code error;
+        socket_.connect(endpoint, error);
+        if (error)
+            throw boost::system::system_error(error);
     }
     catch (std::exception& e) {
         std::cerr << "Connection failed (Error: " << e.what() << ')' << std::endl;
@@ -41,16 +41,16 @@ bool ConnectionHandler::connect() {
     }
     return true;
 }
- 
+
 bool ConnectionHandler::getBytes(char bytes[], unsigned int bytesToRead) {
     size_t tmp = 0;
-	boost::system::error_code error;
+    boost::system::error_code error;
     try {
         while (!error && bytesToRead > tmp ) {
-			tmp += socket_.read_some(boost::asio::buffer(bytes+tmp, bytesToRead-tmp), error);			
+            tmp += socket_.read_some(boost::asio::buffer(bytes+tmp, bytesToRead-tmp), error);
         }
-		if(error)
-			throw boost::system::system_error(error);
+        if(error)
+            throw boost::system::system_error(error);
     } catch (std::exception& e) {
         std::cerr << "recv failed (Error: " << e.what() << ')' << std::endl;
         return false;
@@ -65,24 +65,25 @@ bool ConnectionHandler::getBytes(char bytes[], unsigned int bytesToRead) {
  */
 bool ConnectionHandler::sendBytes(const char bytes[], int bytesToWrite) {
     int tmp = 0;
-	boost::system::error_code error;
+    boost::system::error_code error;
     try {
         while (!error && bytesToWrite > tmp ) {
-			tmp += socket_.write_some(boost::asio::buffer(bytes + tmp, bytesToWrite - tmp), error);
+            tmp += socket_.write_some(boost::asio::buffer(bytes + tmp, bytesToWrite - tmp), error);
         }
-		if(error)
-			throw boost::system::system_error(error);
+        if(error)
+            throw boost::system::system_error(error);
     } catch (std::exception& e) {
         std::cerr << "recv failed (Error: " << e.what() << ')' << std::endl;
         return false;
     }
+
     return true;
 }
- /**
-  *
-  * @param line
-  * @return
-  */
+/**
+ *
+ * @param line
+ * @return
+ */
 bool ConnectionHandler::getLine(std::string& line) {
     return getFrameAscii(line, '\0');
 }
@@ -95,7 +96,7 @@ bool ConnectionHandler::sendLine(std::string& line) {
 
     return sendFrameAscii(line, '\0');
 }
- 
+
 /**
  *
  * @param frame
@@ -109,48 +110,77 @@ bool ConnectionHandler::getFrameAscii(std::string& frame, char delimiter) {
     // Stop when we encounter the null character.
     // Notice that the null character is not appended to the frame string.
     try {
-	do{
-		if(!getBytes(&ch, 1))
-			return false;
+        do{
+            if(!getBytes(&ch, 1))
+                return false;
 
-		frame.append(1, ch);
-        if(getOPC==3){
-            if(frame.at(1)!='\f')
-                ch='\0';
-        }
-        getOPC++;
+            frame.append(1, ch);
+            if(getOPC==3){
+                if(frame.at(1)!='\f')
+                    ch='\0';
+            }
+            getOPC++;
 
-	}while ((getOPC<4)|(delimiter != ch));
+        }while ((getOPC<4)|(delimiter != ch));
     } catch (std::exception& e) {
-	std::cerr << "recv failed2 (Error: " << e.what() << ')' << std::endl;
-	return false;
+        std::cerr << "recv failed2 (Error: " << e.what() << ')' << std::endl;
+        return false;
     }
     return true;
 }
- 
 
-bool ConnectionHandler::sendFrameAscii(const std::string& frame, char delimiter) {
+
+bool ConnectionHandler::sendFrameAscii(std::string& frame, char delimiter) {
     EncoderDecoder c;
     short opCode=c.opcodeToSend(frame);
     char* numberChar =new char[2];
     shortToBytes(opCode,numberChar);
+    if(opCode==13)
+        return true;
 
     bool result= sendBytes(numberChar,2);
-    if(result&&(opCode==1||opCode==2||opCode==3||opCode==8)){
+    if(result&&(opCode==1||opCode==2||opCode==3)){////opCode 1 ,2 ,3
         std::string subFrame=frame.substr(frame.find_first_of(' ')+1);
-
+        std::cout<<"sub  is "<<subFrame<<std::endl;
         std::string subSubFrame=subFrame.substr(0,subFrame.find_first_of(' '));
+        std::cout<<"sub sub is "<<subSubFrame<<std::endl;
         result = sendBytes(subSubFrame.c_str(),subSubFrame.length());
         if(!result) return false;
         result =  sendBytes(&delimiter,1);
         if(!result) return false;
         subSubFrame=subFrame.substr(subFrame.find_first_of(' ')+1);
+        std::cout<<"sub sub2 is "<<subSubFrame<<std::endl;
+
         result= sendBytes(subSubFrame.c_str(),subSubFrame.length());
         if(!result) return false;
-        result =  sendBytes(&delimiter,1);
+        return  sendBytes(&delimiter,1);
     }
-    if(result&&(opCode==4||opCode==11||opCode==13))
+    if(result&&(opCode==8)){
+        std::string subFrame=frame.substr(frame.find_first_of(' ')+1);
+        std::cout<<"sub  is "<<subFrame<<std::endl;
+        result = sendBytes(subFrame.c_str(),subFrame.length());
+        if(!result) return false;
+        return  sendBytes(&delimiter,1);
+
+    }
+    if(result&&(opCode==13)) {
+        std::cout<<opCode<<std::endl;
+        std::string subFrame=frame.substr(frame.find_first_of(' ')+1);
+        std::cout<<"sub  is "<<subFrame<<std::endl;
+        std::cout<<"frame len is "<<frame.length()<<std::endl;
+        std::cout<<"frame len is "<<frame.length()<<std::endl;
+        frame.clear();
+        std::cout<<"frame len is "<<frame.length()<<std::endl;
         return true;
+
+    }
+
+    if(result&&(opCode==4||opCode==11)){
+        std::string subFrame=frame.substr(frame.find_first_of(' ')+1);
+        std::cout<<"sub  is "<<subFrame<<std::endl;
+
+        std::cout<<opCode<<std::endl;
+        return true;}
     if (result&&(opCode==5||opCode==6||opCode==7||opCode==9||opCode==10)){//handdle course reg
         std::string courseNum=frame.substr(frame.find_first_of(' ')+1);
         std::cout<<"Course num before: "<<courseNum<<std::endl;
@@ -163,7 +193,7 @@ bool ConnectionHandler::sendFrameAscii(const std::string& frame, char delimiter)
 
     }
 
-         return result;
+    return result;
 
 }
 /**

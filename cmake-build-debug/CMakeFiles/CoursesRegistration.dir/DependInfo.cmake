@@ -4,7 +4,6 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/AnotherCleint.cpp" "/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/AnotherCleint.cpp.o"
   "/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/EncoderDecoder.cpp" "/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/EncoderDecoder.cpp.o"
   "/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/Task.cpp" "/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/Task.cpp.o"
   "/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/connectionHandler.cpp" "/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/connectionHandler.cpp.o"
