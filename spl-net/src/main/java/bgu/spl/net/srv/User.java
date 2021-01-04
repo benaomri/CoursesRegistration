@@ -26,7 +26,10 @@ public class User {
             Comparator<courseInfo> comp=new studentInfoCompratoor();
             KdamCourses.sort(comp);
         }
-        str = str + "Courses:" + KdamCourses;
+        String courses="[";
+        for(courseInfo course:KdamCourses)
+            courses=courses+course.courseNum+",";
+        str = str + "Courses:" + courses.substring(0,courses.length()-1)+"]";
         return str;
     }
 
@@ -38,11 +41,6 @@ public class User {
         KdamCourses.removeElement(course);
     }
 
-    private String sortKdamCourses() {
-
-
-        return null;
-    }
 }
 
 

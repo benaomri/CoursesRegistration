@@ -100,7 +100,6 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
      * @return if to stop read
      */
     private  boolean stopTORead(byte nextByte) {
-
             if (len <= 2)
                 return false;
             else {
@@ -140,6 +139,7 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         if (len==2) {
             byte[] op={bytes[0],bytes[1]};
             short newOP=bytesToShort(op);
+            System.out.println("OPCODE in push:"+newOP);
             if (newOP>9)
                 OPCODE =""+newOP;
             else
@@ -192,6 +192,7 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         //notice that we explicitly requesting that the string will be decoded from UTF-8
         //this is not actually required as it is the default encoding in java.
 //        String result = new String(bytes, 0, len, StandardCharsets.UTF_8);
+        System.out.println(Arrays.toString(bytes));
 
         int start=2;
         Vector<String > data=new Vector<>();
@@ -201,7 +202,6 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
             OPCODE = "" +getOP;
         else
             OPCODE="0"+getOP;
-
         if (twoParam(OPCODE)) {
             short course = bytesToShort(bytes, 2);
             Vector<String> d = new Vector<>();
@@ -245,6 +245,7 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         i=0;
         len = 0;
         bytes = new byte[1 << 10];
+        System.out.println(Arrays.toString(bytes));
     }
 
     /**

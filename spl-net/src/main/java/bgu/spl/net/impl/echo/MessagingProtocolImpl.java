@@ -14,6 +14,7 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
 
     @Override
     public Message process( Message msg) {
+        System.out.println(msg.getMessageType());
         switch (msg.getMessageType()) {
             /**
              * Admin Regestrion
@@ -193,7 +194,7 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
             case ("08"): {
                 if (isLogin()&&isAdmin) {
                     String student=msg.getData().elementAt(0);
-                    if (!Database.getInstance().checkIfRegister(student))
+                    if ((!Database.getInstance().checkIfRegister(student))||(Database.getInstance().isAdmin(student)))
                         return errorMsg("08");
                     Vector<String> data=new Vector<>();
                     data.add("08");
