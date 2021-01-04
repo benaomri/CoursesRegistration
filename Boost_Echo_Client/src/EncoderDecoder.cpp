@@ -48,14 +48,14 @@ public:
         opAnswer[0]=answer.at(0);
         opAnswer[1]=answer.at(1);
         short op=bytesToShort(opAnswer);
-        opAnswer= nullptr;
+        delete[] opAnswer;
 
         char*opRespond=new char[2];
         opRespond[0]=answer.at(2);
         opRespond[1]=answer.at(3);
         short respond=bytesToShort(opRespond);
         std::string toReturn="";
-        opRespond= nullptr;
+        delete[] opRespond;
 
         if(op==12){
             toReturn.append("ACK ");

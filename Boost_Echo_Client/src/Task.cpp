@@ -10,7 +10,7 @@
 #include "queue"
 class Task{
 
-    // std::mutex & _mutex;
+
 public:
 
     Task (std::queue<std::string>&_messegeQueue)  : messegeQueue(_messegeQueue)  {}

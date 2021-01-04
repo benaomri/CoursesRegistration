@@ -12,15 +12,15 @@ using std::cout;
 using std::cerr;
 using std::endl;
 using std::string;
-/**
- *
- * @param host
- * @param port
- */
+ /**
+  *
+  * @param host
+  * @param port
+  */
 ConnectionHandler::ConnectionHandler(string host, short port): host_(host), port_(port), io_service_(), socket_(io_service_){}
-/**
- *
- */
+    /**
+     *
+     */
 ConnectionHandler::~ConnectionHandler() {
     close();
 }
@@ -129,66 +129,53 @@ bool ConnectionHandler::getFrameAscii(std::string& frame, char delimiter) {
     return true;
 }
 
-
+/**
+ *
+ * @param frame
+ * @param delimiter
+ * @return true if sucssed
+ */
 bool ConnectionHandler::sendFrameAscii(std::string& frame, char delimiter) {
     EncoderDecoder c;
     short opCode=c.opcodeToSend(frame);
     char* numberChar =new char[2];
     shortToBytes(opCode,numberChar);
-    if(opCode==13)
+    if(opCode==13)//13 is default number to avoid illegal input from client
         return true;
 
-    bool result= sendBytes(numberChar,2);
-    if(result&&(opCode==1||opCode==2||opCode==3)){////opCode 1 ,2 ,3
+    bool result= sendBytes(numberChar,2);////send op code
+    delete[] numberChar;// delete numberChar to avoid leaking
+
+    ////ADMINREG STUDENTREG LOGIN
+    if(result&&(opCode==1||opCode==2||opCode==3)){
         std::string subFrame=frame.substr(frame.find_first_of(' ')+1);
-        std::cout<<"sub  is "<<subFrame<<std::endl;
         std::string subSubFrame=subFrame.substr(0,subFrame.find_first_of(' '));
-        std::cout<<"sub sub is "<<subSubFrame<<std::endl;
         result = sendBytes(subSubFrame.c_str(),subSubFrame.length());
         if(!result) return false;
         result =  sendBytes(&delimiter,1);
         if(!result) return false;
         subSubFrame=subFrame.substr(subFrame.find_first_of(' ')+1);
-        std::cout<<"sub sub2 is "<<subSubFrame<<std::endl;
-
         result= sendBytes(subSubFrame.c_str(),subSubFrame.length());
         if(!result) return false;
         return  sendBytes(&delimiter,1);
     }
+    ////STUDENTSTAT if true send student name finish with \0
     if(result&&(opCode==8)){
         std::string subFrame=frame.substr(frame.find_first_of(' ')+1);
-        std::cout<<"sub  is "<<subFrame<<std::endl;
         result = sendBytes(subFrame.c_str(),subFrame.length());
         if(!result) return false;
         return  sendBytes(&delimiter,1);
 
     }
-    if(result&&(opCode==13)) {
-        std::cout<<opCode<<std::endl;
-        std::string subFrame=frame.substr(frame.find_first_of(' ')+1);
-        std::cout<<"sub  is "<<subFrame<<std::endl;
-        std::cout<<"frame len is "<<frame.length()<<std::endl;
-        std::cout<<"frame len is "<<frame.length()<<std::endl;
-        frame.clear();
-        std::cout<<"frame len is "<<frame.length()<<std::endl;
+    ////LOGOUT or MYCOURSES *dont need to send more then opCode
+    if(result&&(opCode==4||opCode==11))
         return true;
 
-    }
-
-    if(result&&(opCode==4||opCode==11)){
-        std::string subFrame=frame.substr(frame.find_first_of(' ')+1);
-        std::cout<<"sub  is "<<subFrame<<std::endl;
-
-        std::cout<<opCode<<std::endl;
-        return true;}
-    if (result&&(opCode==5||opCode==6||opCode==7||opCode==9||opCode==10)){//handdle course reg
-        std::string courseNum=frame.substr(frame.find_first_of(' ')+1);
-        std::cout<<"Course num before: "<<courseNum<<std::endl;
+    //////handdle COURSEREG KDAMCHECK COURSESTAT ISREGISTERED UNREGISTER
+    if (result&&(opCode==5||opCode==6||opCode==7||opCode==9||opCode==10)){
+        std::string courseNum=frame.substr(frame.find_first_of(' ')+1);// the end of the message course number
         short shortCourseNum = boost::lexical_cast<short>(courseNum);//change string to short
-        std::cout<<"Course num after: "<<shortCourseNum<<std::endl;
-        c.shortToBytes(shortCourseNum,numberChar);
-        std::cout<<"Course num in bytes: "<<numberChar[0]<<","<<numberChar[1]<<std::endl;
-        std::cout<<"Course num in short: "<<c.bytesToShort(numberChar)<<std::endl;
+        c.shortToBytes(shortCourseNum,numberChar);//change from short to byte
         return  sendBytes(numberChar,2);
 
     }
