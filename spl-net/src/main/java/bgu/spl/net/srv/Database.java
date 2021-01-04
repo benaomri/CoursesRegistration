@@ -39,6 +39,7 @@ public class Database {
      * into the Database, returns true if successful.
      */
     public boolean initialize(String coursesFilePath)  {
+        int id=0;
         File file=new File(coursesFilePath);
       try {
           Scanner scanner=new Scanner(file);
@@ -46,8 +47,9 @@ public class Database {
               String line =scanner.nextLine();
               try {
                   CheckinputTxt checkedLine=new CheckinputTxt(line);
-                  courseInfo courseFromLine=new courseInfo(checkedLine.getCourseNum(),checkedLine.getCourseName(),checkedLine.getKdamCorseList(),checkedLine.getNumOfMaxStudents());
+                  courseInfo courseFromLine=new courseInfo(id,checkedLine.getCourseNum(),checkedLine.getCourseName(),checkedLine.getKdamCorseList(),checkedLine.getNumOfMaxStudents());
                   coursesMap.putIfAbsent(courseFromLine.courseNum,courseFromLine);
+                  id++;
 
               }catch (Exception e){
                   return false;
@@ -143,7 +145,7 @@ public class Database {
      */
     public boolean checkIfPossibleToReg(String courseNum,String userName){
 
-        return  checkIfcourseExist(courseNum)&&//check course exist in the dataBase
+        return  checkIfCourseExist(courseNum)&&//check course exist in the dataBase
                 checkSpaceInCourse(courseNum)&&///check course has space
                 checkKdam(courseNum, userName);//checking that the student has all the kdam courses
 
@@ -154,7 +156,7 @@ public class Database {
      * @param courseNum
      * @return if there course exist in the dataBase
      */
-    public boolean checkIfcourseExist(String courseNum){
+    public boolean checkIfCourseExist(String courseNum){
         return coursesMap.containsKey(courseNum);
     }
 
@@ -181,10 +183,9 @@ public class Database {
 
 
     /**
-     *
+     * register a student to course
      * @param userName
      * @param courseNumber
-     * register a student to course
      */
      public synchronized void registerToCourse(String userName, String courseNumber){
          registerMapStudent.get(userName).addCourse(courseNumber);//add to the student that he did the course
@@ -248,6 +249,11 @@ public class Database {
                 "registerMapStudent=" + registerMapStudent.toString() +
                 ", coursesMap=" + coursesMap.toString() +
                 '}';
+    }
+
+
+    public courseInfo getCourse(String course){
+        return coursesMap.get(course);
     }
 
 
