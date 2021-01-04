@@ -49,7 +49,7 @@ public:
     unsigned long readableByts();
 
     static void shortToBytes(short num, char* bytesArr);
-
+	
     // Close down the connection properly.
     void close();
  

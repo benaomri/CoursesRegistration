@@ -27,7 +27,7 @@ public:
         if(opToReturn =="KDAMCHECK") return 6;
         if(opToReturn =="COURSESTAT") return 7;
         if(opToReturn =="STUDENTSTAT") return 8;
-        if(opToReturn =="ISREGISTER") return 9;
+        if(opToReturn =="ISREGISTERED") return 9;
         if(opToReturn =="UNREGISTER") return 10;
         if(opToReturn =="MYCOURSES") return 11;
         if(opToReturn =="ACK") return 12;
@@ -48,17 +48,20 @@ public:
         opAnswer[0]=answer.at(0);
         opAnswer[1]=answer.at(1);
         short op=bytesToShort(opAnswer);
+        opAnswer= nullptr;
 
-        char* opRespond=new char[2];
+        char*opRespond=new char[2];
         opRespond[0]=answer.at(2);
         opRespond[1]=answer.at(3);
         short respond=bytesToShort(opRespond);
         std::string toReturn="";
+        opRespond= nullptr;
 
         if(op==12){
             toReturn.append("ACK ");
             toReturn+=std::to_string(respond);
-            toReturn.append(answer.substr(5));
+            if(answer.substr(4).length()>1)
+                toReturn.append(answer.substr(4,answer.length()-2));
             return toReturn  ;
          }
          else {
@@ -74,14 +77,14 @@ public:
       * return true if suppose to logout
       */
      bool printAnswer(std::string answer){
+         std::cout << answer << std::endl;
+
          if (answer.substr(0,3) == "ACK") {
-             std::cout << answer << std::endl;
-             if(answer.substr(4)=="04") {//check if suppose to logOut
+             if(!answer.substr(4).compare("4")) {//check if suppose to logOut
                  std::cout << "Exiting...\n" << std::endl;
                  return true;
              }
          }else{
-             std::cout << answer << std::endl;
              return false;
          }
     }
@@ -96,6 +99,7 @@ public:
     {
         short result = (short)((bytesArr[0] & 0xff) << 8);
         result += (short)(bytesArr[1] & 0xff);
+        bytesArr= nullptr;
         return result;
     }
 

@@ -6,7 +6,7 @@ link_libraries("-lboost_system")
 link_libraries(-pthread)
 add_executable(CoursesRegistration
         Boost_Echo_Client/src/connectionHandler.cpp
-        Boost_Echo_Client/src/echoClient.cpp
+        "Boost_Echo_Client/src/BGRsclient .cpp"
         /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/Task.cpp
         /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/EncoderDecoder.cpp
         )

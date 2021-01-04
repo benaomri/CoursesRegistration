@@ -95,7 +95,7 @@ bool ConnectionHandler::sendLine(std::string& line) {
 
     return sendFrameAscii(line, '\0');
 }
-
+ 
 /**
  *
  * @param frame
@@ -113,17 +113,14 @@ bool ConnectionHandler::getFrameAscii(std::string& frame, char delimiter) {
 		if(!getBytes(&ch, 1))
 			return false;
 
-		if(ch!='\0')
-			frame.append(1, ch);
-		else
-            frame.append(1, ch);
-        getOPC++;
-        if(getOPC==4){
+		frame.append(1, ch);
+        if(getOPC==3){
             if(frame.at(1)!='\f')
                 ch='\0';
         }
+        getOPC++;
 
-	}while ((delimiter != ch)|((getOPC>0)&(getOPC<4)));
+	}while ((getOPC<4)|(delimiter != ch));
     } catch (std::exception& e) {
 	std::cerr << "recv failed2 (Error: " << e.what() << ')' << std::endl;
 	return false;
@@ -131,13 +128,13 @@ bool ConnectionHandler::getFrameAscii(std::string& frame, char delimiter) {
     return true;
 }
  
- 
+
 bool ConnectionHandler::sendFrameAscii(const std::string& frame, char delimiter) {
     EncoderDecoder c;
     short opCode=c.opcodeToSend(frame);
     char* numberChar =new char[2];
     shortToBytes(opCode,numberChar);
-    std::cout<<numberChar[1]<<std::endl;
+
     bool result= sendBytes(numberChar,2);
     if(result&&(opCode==1||opCode==2||opCode==3||opCode==8)){
         std::string subFrame=frame.substr(frame.find_first_of(' ')+1);
@@ -155,9 +152,13 @@ bool ConnectionHandler::sendFrameAscii(const std::string& frame, char delimiter)
     if(result&&(opCode==4||opCode==11||opCode==13))
         return true;
     if (result&&(opCode==5||opCode==6||opCode==7||opCode==9||opCode==10)){//handdle course reg
-        std::string courseNum=frame.substr(frame.find_first_of(' '));
+        std::string courseNum=frame.substr(frame.find_first_of(' ')+1);
+        std::cout<<"Course num before: "<<courseNum<<std::endl;
         short shortCourseNum = boost::lexical_cast<short>(courseNum);//change string to short
+        std::cout<<"Course num after: "<<shortCourseNum<<std::endl;
         c.shortToBytes(shortCourseNum,numberChar);
+        std::cout<<"Course num in bytes: "<<numberChar[0]<<","<<numberChar[1]<<std::endl;
+        std::cout<<"Course num in short: "<<c.bytesToShort(numberChar)<<std::endl;
         return  sendBytes(numberChar,2);
 
     }

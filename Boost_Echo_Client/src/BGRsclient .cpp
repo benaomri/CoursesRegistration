@@ -50,6 +50,7 @@ int main (int argc, char *argv[]) {
                 break;
             }
 //            std::cout << "Sent " << len+1 << " bytes to server" << std::endl;
+        line.clear();
         }
 ////		 connectionHandler.sendLine(line) appends '\n' to the message. Therefor we send len+1 bytes.
 
@@ -83,7 +84,7 @@ int main (int argc, char *argv[]) {
 
 
             answer = c.decodeOpCode(answer);
-            std::cout << "Reply: " << answer << " " <<  std::endl << std::endl;
+//            std::cout << "Reply: " << answer << " " <<  std::endl << std::endl;
             bool teminateNPrint=c.printAnswer(answer);
             if (teminateNPrint) {
                 readFromKey.shouldTermint = teminateNPrint;
@@ -94,6 +95,7 @@ int main (int argc, char *argv[]) {
         }
 
     }
+    threadReader.detach();
     return 0;
 }
 
