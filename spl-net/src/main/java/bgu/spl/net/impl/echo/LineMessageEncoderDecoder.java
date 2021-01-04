@@ -43,7 +43,7 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
 
     /**
      * Check if we in ONEPARAM CASE
-     * Case:(4,10)
+     * Case:(4,11)
      * @param op
      * @returnif we in ONEPARAM CASE
      */
@@ -106,8 +106,6 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
                 if (OPCODE.equals("13"))
                     return false;
                 else if (twoParam(OPCODE)) {
-                    System.out.println("Now in two param in stopTORead");
-                    System.out.println("CHECK IF len == 4 "+(len == 4));
                     return len == 4;
                 }
                 else if (oneParam(OPCODE))
@@ -139,7 +137,6 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         if (len==2) {
             byte[] op={bytes[0],bytes[1]};
             short newOP=bytesToShort(op);
-            System.out.println("OPCODE in push:"+newOP);
             if (newOP>9)
                 OPCODE =""+newOP;
             else
@@ -192,7 +189,6 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         //notice that we explicitly requesting that the string will be decoded from UTF-8
         //this is not actually required as it is the default encoding in java.
 //        String result = new String(bytes, 0, len, StandardCharsets.UTF_8);
-        System.out.println(Arrays.toString(bytes));
 
         int start=2;
         Vector<String > data=new Vector<>();
@@ -202,6 +198,7 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
             OPCODE = "" +getOP;
         else
             OPCODE="0"+getOP;
+
         if (twoParam(OPCODE)) {
             short course = bytesToShort(bytes, 2);
             Vector<String> d = new Vector<>();
@@ -217,15 +214,15 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
             reINIT();
             return new Message(OPCODE, new Vector<>());
         }
-        else if (OPCODE.equals("12")){
-            byte[] newOP={bytes[2],bytes[3]};
-            short op=bytesToShort(newOP);
-            if(op>10)
-                data.add(""+op);
-            else
-                data.add("0"+op);
-            start=4;
-        }
+//        else if (OPCODE.equals("12")){
+//            byte[] newOP={bytes[2],bytes[3]};
+//            short op=bytesToShort(newOP);
+//            if(op>10)
+//                data.add(""+op);
+//            else
+//                data.add("0"+op);
+//            start=4;
+//        }
 
 
         String result = new String(bytes, start, len, StandardCharsets.UTF_8);
@@ -245,7 +242,6 @@ public class LineMessageEncoderDecoder implements MessageEncoderDecoder<Message>
         i=0;
         len = 0;
         bytes = new byte[1 << 10];
-        System.out.println(Arrays.toString(bytes));
     }
 
     /**

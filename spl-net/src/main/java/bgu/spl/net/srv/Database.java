@@ -1,5 +1,6 @@
 package bgu.spl.net.srv;
 
+import java.util.Comparator;
 import java.util.Scanner;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
@@ -47,6 +48,7 @@ public class Database {
               String line =scanner.nextLine();
               try {
                   CheckinputTxt checkedLine=new CheckinputTxt(line);
+
                   courseInfo courseFromLine=new courseInfo(id,checkedLine.getCourseNum(),checkedLine.getCourseName(),checkedLine.getKdamCorseList(),checkedLine.getNumOfMaxStudents());
                   coursesMap.putIfAbsent(courseFromLine.courseNum,courseFromLine);
                   id++;
@@ -71,7 +73,6 @@ public class Database {
         try {
             registerMapStudent.putIfAbsent(name, new User(name, password));
         } catch (Exception e) {
-            System.out.println("Put if absent");
             return false;
         }
         return true;
@@ -95,7 +96,6 @@ public class Database {
      */
     public boolean checkIfRegister(String name)
     {
-        System.out.println(registerMapStudent.containsKey(name));
         return registerMapStudent.containsKey(name);
     }
 
@@ -144,7 +144,6 @@ public class Database {
      * @return if its pissible to register to course
      */
     public boolean checkIfPossibleToReg(String courseNum,String userName){
-
         return  checkIfCourseExist(courseNum)&&//check course exist in the dataBase
                 checkSpaceInCourse(courseNum)&&///check course has space
                 checkKdam(courseNum, userName);//checking that the student has all the kdam courses
@@ -227,6 +226,8 @@ public class Database {
      * @return
      */
     public Vector<String> getKdam(String coursNum){
+        Comparator<String> comp=new kdamCheckComprator();
+        coursesMap.get(coursNum).KdamCoursesList.sort(comp);
         return coursesMap.get(coursNum).KdamCoursesList;
     }
 

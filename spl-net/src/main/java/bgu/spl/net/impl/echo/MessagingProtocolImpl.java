@@ -14,7 +14,6 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
 
     @Override
     public Message process( Message msg) {
-        System.out.println(msg.getMessageType());
         switch (msg.getMessageType()) {
             /**
              * Admin Regestrion
@@ -127,7 +126,7 @@ public class MessagingProtocolImpl implements MessagingProtocol<Message> {
                     if (isAdmin) {
                         return errorMsg("05");
                     }else {
-                        String courseNum=msg.getData().elementAt(0);
+                        String courseNum=""+Short.valueOf(msg.getData().elementAt(0));
                         if (!Database.getInstance().checkIfPossibleToReg(courseNum, userName)) {
                             return errorMsg("05");
                         }

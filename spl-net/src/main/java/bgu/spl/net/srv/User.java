@@ -10,7 +10,7 @@ public class User {
     String userPassword;
     boolean isAdmin;
     boolean login;
-    Vector<courseInfo> KdamCourses;
+    Vector<String> KdamCourses;
 
     public User(String userName, String userPassword) {
         this.userName = userName;
@@ -22,19 +22,12 @@ public class User {
 
     public String toString() {
         String str = "Student: <" + userName + ">\n";
-        if (!KdamCourses.isEmpty()) {
-            Comparator<courseInfo> comp=new studentInfoCompratoor();
-            KdamCourses.sort(comp);
-        }
-        String courses="[";
-        for(courseInfo course:KdamCourses)
-            courses=courses+course.courseNum+",";
-        str = str + "Courses:" + courses.substring(0,courses.length()-1)+"]";
+        str = str + "Courses:" + KdamCourses.toString().replaceAll(" ","");
         return str;
     }
 
     public void addCourse(String course) {
-        KdamCourses.add(Database.getInstance().getCourse(course));
+        KdamCourses.add(course);
     }
 
     public void removeCourse(String course) {

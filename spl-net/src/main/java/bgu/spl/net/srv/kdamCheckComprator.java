@@ -2,7 +2,7 @@ package bgu.spl.net.srv;
 
 import java.util.Comparator;
 
-public class studentInfoCompratoor implements Comparator<courseInfo> {
+public class kdamCheckComprator implements Comparator<String> {
     /**
      * Compares its two arguments for order.  Returns a negative integer,
      * zero, or a positive integer as the first argument is less than, equal
@@ -44,10 +44,13 @@ public class studentInfoCompratoor implements Comparator<courseInfo> {
      *                              being compared by this comparator.
      */
     @Override
-    public int compare(courseInfo o1, courseInfo o2) {
-        if (o1.getId()==o2.getId())
+    public int compare(String o1, String o2) {
+        courseInfo course1=Database.getInstance().getCourse(o1);
+        courseInfo course2=Database.getInstance().getCourse(o2);
+
+        if (course1.getId()==course2.getId())
             return 0;
-        else if(o1.getId()>o2.getId())
+        else if(course1.getId()>course2.getId())
             return 1;
         else
             return -1;

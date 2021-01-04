@@ -60,9 +60,7 @@ public class Reactor<T> implements Server<T> {
                     } else if (key.isAcceptable()) {
                         handleAccept(serverSock, selector);
                     } else {
-                        System.out.println("key read write");
                         handleReadWrite(key);
-                        System.out.println("readWrite");
                     }
                 }
 
@@ -77,7 +75,6 @@ public class Reactor<T> implements Server<T> {
             ex.printStackTrace();
         }
 
-        System.out.println("server closed!!!");
         pool.shutdown();
     }
 

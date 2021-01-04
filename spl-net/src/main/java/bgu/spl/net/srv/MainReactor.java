@@ -8,7 +8,7 @@ import bgu.spl.net.impl.rci.RemoteCommandInvocationProtocol;
 
 public class MainReactor {
     public static void main(String[] args) {
-        Database.getInstance().initialize("/home/spl211/IdeaProjects/CoursesRegistration/spl-net/src/main/java/bgu/spl/net/srv/Courses.txt");
+        Database.getInstance().initialize("/home/spl211/IdeaProjects/CoursesRegistrationT/spl-net/src/main/java/bgu/spl/net/srv/Courses.txt");
         new Reactor(1, 7776,
                 () -> new MessagingProtocolImpl(),
                LineMessageEncoderDecoder::new).serve();
