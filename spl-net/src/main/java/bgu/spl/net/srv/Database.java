@@ -226,8 +226,6 @@ public class Database {
      * @return
      */
     public Vector<String> getKdam(String coursNum){
-        Comparator<String> comp=new kdamCheckComprator();
-        coursesMap.get(coursNum).KdamCoursesList.sort(comp);
         return coursesMap.get(coursNum).KdamCoursesList;
     }
 
