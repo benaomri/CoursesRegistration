@@ -84,16 +84,16 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/EncoderDecoder.cpp">
+		<Unit filename="/home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/BGRSclient.cpp">
 			<Option target="CoursesRegistration"/>
 		</Unit>
-		<Unit filename="/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/Task.cpp">
+		<Unit filename="/home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/EncoderDecoder.cpp">
 			<Option target="CoursesRegistration"/>
 		</Unit>
-		<Unit filename="/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/connectionHandler.cpp">
+		<Unit filename="/home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/Task.cpp">
 			<Option target="CoursesRegistration"/>
 		</Unit>
-		<Unit filename="/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/echoClient.cpp">
+		<Unit filename="/home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/connectionHandler.cpp">
 			<Option target="CoursesRegistration"/>
 		</Unit>
 		<Unit filename="/home/spl211/CLionProjects/CoursesRegistration/CMakeLists.txt">

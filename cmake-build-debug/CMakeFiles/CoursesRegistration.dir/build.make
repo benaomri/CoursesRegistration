@@ -77,72 +77,72 @@ include CMakeFiles/CoursesRegistration.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/CoursesRegistration.dir/flags.make
 
-CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/connectionHandler.cpp.o: CMakeFiles/CoursesRegistration.dir/flags.make
-CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/connectionHandler.cpp.o: ../Boost_Echo_Client/src/connectionHandler.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/connectionHandler.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/connectionHandler.cpp.o -c /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/connectionHandler.cpp
+CMakeFiles/CoursesRegistration.dir/BGRSclient/src/connectionHandler.cpp.o: CMakeFiles/CoursesRegistration.dir/flags.make
+CMakeFiles/CoursesRegistration.dir/BGRSclient/src/connectionHandler.cpp.o: ../BGRSclient/src/connectionHandler.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/CoursesRegistration.dir/BGRSclient/src/connectionHandler.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CoursesRegistration.dir/BGRSclient/src/connectionHandler.cpp.o -c /home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/connectionHandler.cpp
 
-CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/connectionHandler.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/connectionHandler.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/connectionHandler.cpp > CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/connectionHandler.cpp.i
+CMakeFiles/CoursesRegistration.dir/BGRSclient/src/connectionHandler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CoursesRegistration.dir/BGRSclient/src/connectionHandler.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/connectionHandler.cpp > CMakeFiles/CoursesRegistration.dir/BGRSclient/src/connectionHandler.cpp.i
 
-CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/connectionHandler.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/connectionHandler.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/connectionHandler.cpp -o CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/connectionHandler.cpp.s
+CMakeFiles/CoursesRegistration.dir/BGRSclient/src/connectionHandler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CoursesRegistration.dir/BGRSclient/src/connectionHandler.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/connectionHandler.cpp -o CMakeFiles/CoursesRegistration.dir/BGRSclient/src/connectionHandler.cpp.s
 
-CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/echoClient.cpp.o: CMakeFiles/CoursesRegistration.dir/flags.make
-CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/echoClient.cpp.o: ../Boost_Echo_Client/src/echoClient.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/echoClient.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/echoClient.cpp.o -c /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/echoClient.cpp
+CMakeFiles/CoursesRegistration.dir/BGRSclient/src/BGRSclient.cpp.o: CMakeFiles/CoursesRegistration.dir/flags.make
+CMakeFiles/CoursesRegistration.dir/BGRSclient/src/BGRSclient.cpp.o: ../BGRSclient/src/BGRSclient.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/CoursesRegistration.dir/BGRSclient/src/BGRSclient.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CoursesRegistration.dir/BGRSclient/src/BGRSclient.cpp.o -c /home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/BGRSclient.cpp
 
-CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/echoClient.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/echoClient.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/echoClient.cpp > CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/echoClient.cpp.i
+CMakeFiles/CoursesRegistration.dir/BGRSclient/src/BGRSclient.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CoursesRegistration.dir/BGRSclient/src/BGRSclient.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/BGRSclient.cpp > CMakeFiles/CoursesRegistration.dir/BGRSclient/src/BGRSclient.cpp.i
 
-CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/echoClient.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/echoClient.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/echoClient.cpp -o CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/echoClient.cpp.s
+CMakeFiles/CoursesRegistration.dir/BGRSclient/src/BGRSclient.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CoursesRegistration.dir/BGRSclient/src/BGRSclient.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/BGRSclient.cpp -o CMakeFiles/CoursesRegistration.dir/BGRSclient/src/BGRSclient.cpp.s
 
-CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/Task.cpp.o: CMakeFiles/CoursesRegistration.dir/flags.make
-CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/Task.cpp.o: ../Boost_Echo_Client/src/Task.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/Task.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/Task.cpp.o -c /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/Task.cpp
+CMakeFiles/CoursesRegistration.dir/BGRSclient/src/Task.cpp.o: CMakeFiles/CoursesRegistration.dir/flags.make
+CMakeFiles/CoursesRegistration.dir/BGRSclient/src/Task.cpp.o: ../BGRSclient/src/Task.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/CoursesRegistration.dir/BGRSclient/src/Task.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CoursesRegistration.dir/BGRSclient/src/Task.cpp.o -c /home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/Task.cpp
 
-CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/Task.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/Task.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/Task.cpp > CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/Task.cpp.i
+CMakeFiles/CoursesRegistration.dir/BGRSclient/src/Task.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CoursesRegistration.dir/BGRSclient/src/Task.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/Task.cpp > CMakeFiles/CoursesRegistration.dir/BGRSclient/src/Task.cpp.i
 
-CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/Task.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/Task.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/Task.cpp -o CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/Task.cpp.s
+CMakeFiles/CoursesRegistration.dir/BGRSclient/src/Task.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CoursesRegistration.dir/BGRSclient/src/Task.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/Task.cpp -o CMakeFiles/CoursesRegistration.dir/BGRSclient/src/Task.cpp.s
 
-CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/EncoderDecoder.cpp.o: CMakeFiles/CoursesRegistration.dir/flags.make
-CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/EncoderDecoder.cpp.o: ../Boost_Echo_Client/src/EncoderDecoder.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/EncoderDecoder.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/EncoderDecoder.cpp.o -c /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/EncoderDecoder.cpp
+CMakeFiles/CoursesRegistration.dir/BGRSclient/src/EncoderDecoder.cpp.o: CMakeFiles/CoursesRegistration.dir/flags.make
+CMakeFiles/CoursesRegistration.dir/BGRSclient/src/EncoderDecoder.cpp.o: ../BGRSclient/src/EncoderDecoder.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/CoursesRegistration.dir/BGRSclient/src/EncoderDecoder.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CoursesRegistration.dir/BGRSclient/src/EncoderDecoder.cpp.o -c /home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/EncoderDecoder.cpp
 
-CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/EncoderDecoder.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/EncoderDecoder.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/EncoderDecoder.cpp > CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/EncoderDecoder.cpp.i
+CMakeFiles/CoursesRegistration.dir/BGRSclient/src/EncoderDecoder.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CoursesRegistration.dir/BGRSclient/src/EncoderDecoder.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/EncoderDecoder.cpp > CMakeFiles/CoursesRegistration.dir/BGRSclient/src/EncoderDecoder.cpp.i
 
-CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/EncoderDecoder.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/EncoderDecoder.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/EncoderDecoder.cpp -o CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/EncoderDecoder.cpp.s
+CMakeFiles/CoursesRegistration.dir/BGRSclient/src/EncoderDecoder.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CoursesRegistration.dir/BGRSclient/src/EncoderDecoder.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/EncoderDecoder.cpp -o CMakeFiles/CoursesRegistration.dir/BGRSclient/src/EncoderDecoder.cpp.s
 
 # Object files for target CoursesRegistration
 CoursesRegistration_OBJECTS = \
-"CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/connectionHandler.cpp.o" \
-"CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/echoClient.cpp.o" \
-"CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/Task.cpp.o" \
-"CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/EncoderDecoder.cpp.o"
+"CMakeFiles/CoursesRegistration.dir/BGRSclient/src/connectionHandler.cpp.o" \
+"CMakeFiles/CoursesRegistration.dir/BGRSclient/src/BGRSclient.cpp.o" \
+"CMakeFiles/CoursesRegistration.dir/BGRSclient/src/Task.cpp.o" \
+"CMakeFiles/CoursesRegistration.dir/BGRSclient/src/EncoderDecoder.cpp.o"
 
 # External object files for target CoursesRegistration
 CoursesRegistration_EXTERNAL_OBJECTS =
 
-CoursesRegistration: CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/connectionHandler.cpp.o
-CoursesRegistration: CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/echoClient.cpp.o
-CoursesRegistration: CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/Task.cpp.o
-CoursesRegistration: CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/EncoderDecoder.cpp.o
+CoursesRegistration: CMakeFiles/CoursesRegistration.dir/BGRSclient/src/connectionHandler.cpp.o
+CoursesRegistration: CMakeFiles/CoursesRegistration.dir/BGRSclient/src/BGRSclient.cpp.o
+CoursesRegistration: CMakeFiles/CoursesRegistration.dir/BGRSclient/src/Task.cpp.o
+CoursesRegistration: CMakeFiles/CoursesRegistration.dir/BGRSclient/src/EncoderDecoder.cpp.o
 CoursesRegistration: CMakeFiles/CoursesRegistration.dir/build.make
 CoursesRegistration: CMakeFiles/CoursesRegistration.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable CoursesRegistration"

@@ -5,8 +5,8 @@ set(CMAKE_CXX_STANDARD 11)
 link_libraries("-lboost_system")
 link_libraries(-pthread)
 add_executable(CoursesRegistration
-        Boost_Echo_Client/src/connectionHandler.cpp
-        Boost_Echo_Client/src/echoClient.cpp
-        /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/Task.cpp
-        /home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/EncoderDecoder.cpp
+        /home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/connectionHandler.cpp
+        BGRSclient/src/BGRSclient.cpp
+        /home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/Task.cpp
+        /home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/EncoderDecoder.cpp
         )

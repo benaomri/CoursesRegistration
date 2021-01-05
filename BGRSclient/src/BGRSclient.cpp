@@ -1,16 +1,14 @@
-#include "boost/asio/socket_base.hpp"
-#include "boost/asio.hpp"
 
 #include <stdlib.h>
-#include </home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/include/connectionHandler.h>
+#include "../include/connectionHandler.h"
 #include <iostream>
-#include <mutex>
+
 #include <thread>
-#include "/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/Task.cpp"
+#include "../src/Task.cpp"
 #include "string"
 #include "queue"
-#include "/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/EncoderDecoder.cpp"
-
+#include "../src/EncoderDecoder.cpp"
+////// niv add commet
 /**
 * This code assumes that the server replies the exact text the client sent it (as opposed to the practical session example)
 */

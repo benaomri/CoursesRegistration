@@ -4,10 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/EncoderDecoder.cpp" "/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/EncoderDecoder.cpp.o"
-  "/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/Task.cpp" "/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/Task.cpp.o"
-  "/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/connectionHandler.cpp" "/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/connectionHandler.cpp.o"
-  "/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/echoClient.cpp" "/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/echoClient.cpp.o"
+  "/home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/BGRSclient.cpp" "/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles/CoursesRegistration.dir/BGRSclient/src/BGRSclient.cpp.o"
+  "/home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/EncoderDecoder.cpp" "/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles/CoursesRegistration.dir/BGRSclient/src/EncoderDecoder.cpp.o"
+  "/home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/Task.cpp" "/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles/CoursesRegistration.dir/BGRSclient/src/Task.cpp.o"
+  "/home/spl211/CLionProjects/CoursesRegistration/BGRSclient/src/connectionHandler.cpp" "/home/spl211/CLionProjects/CoursesRegistration/cmake-build-debug/CMakeFiles/CoursesRegistration.dir/BGRSclient/src/connectionHandler.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

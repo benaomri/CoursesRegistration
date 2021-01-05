@@ -1,12 +1,12 @@
-#include </home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/include/connectionHandler.h>
+#include "../include/connectionHandler.h"
 #include <iostream>
-#include <mutex>
 #include <thread>
-#include "/home/spl211/CLionProjects/CoursesRegistration/Boost_Echo_Client/src/EncoderDecoder.cpp"
+#include "../src/EncoderDecoder.cpp"
 #include <algorithm>
-using boost::asio::ip::tcp;
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string/replace.hpp>
+
+using boost::asio::ip::tcp;
 using std::cin;
 using std::cout;
 using std::cerr;

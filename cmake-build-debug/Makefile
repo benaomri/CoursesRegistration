@@ -143,113 +143,113 @@ CoursesRegistration/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/build
 .PHONY : CoursesRegistration/fast
 
-Boost_Echo_Client/src/EncoderDecoder.o: Boost_Echo_Client/src/EncoderDecoder.cpp.o
+BGRSclient/src/BGRSclient.o: BGRSclient/src/BGRSclient.cpp.o
 
-.PHONY : Boost_Echo_Client/src/EncoderDecoder.o
-
-# target to build an object file
-Boost_Echo_Client/src/EncoderDecoder.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/EncoderDecoder.cpp.o
-.PHONY : Boost_Echo_Client/src/EncoderDecoder.cpp.o
-
-Boost_Echo_Client/src/EncoderDecoder.i: Boost_Echo_Client/src/EncoderDecoder.cpp.i
-
-.PHONY : Boost_Echo_Client/src/EncoderDecoder.i
-
-# target to preprocess a source file
-Boost_Echo_Client/src/EncoderDecoder.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/EncoderDecoder.cpp.i
-.PHONY : Boost_Echo_Client/src/EncoderDecoder.cpp.i
-
-Boost_Echo_Client/src/EncoderDecoder.s: Boost_Echo_Client/src/EncoderDecoder.cpp.s
-
-.PHONY : Boost_Echo_Client/src/EncoderDecoder.s
-
-# target to generate assembly for a file
-Boost_Echo_Client/src/EncoderDecoder.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/EncoderDecoder.cpp.s
-.PHONY : Boost_Echo_Client/src/EncoderDecoder.cpp.s
-
-Boost_Echo_Client/src/Task.o: Boost_Echo_Client/src/Task.cpp.o
-
-.PHONY : Boost_Echo_Client/src/Task.o
+.PHONY : BGRSclient/src/BGRSclient.o
 
 # target to build an object file
-Boost_Echo_Client/src/Task.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/Task.cpp.o
-.PHONY : Boost_Echo_Client/src/Task.cpp.o
+BGRSclient/src/BGRSclient.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/BGRSclient/src/BGRSclient.cpp.o
+.PHONY : BGRSclient/src/BGRSclient.cpp.o
 
-Boost_Echo_Client/src/Task.i: Boost_Echo_Client/src/Task.cpp.i
+BGRSclient/src/BGRSclient.i: BGRSclient/src/BGRSclient.cpp.i
 
-.PHONY : Boost_Echo_Client/src/Task.i
+.PHONY : BGRSclient/src/BGRSclient.i
 
 # target to preprocess a source file
-Boost_Echo_Client/src/Task.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/Task.cpp.i
-.PHONY : Boost_Echo_Client/src/Task.cpp.i
+BGRSclient/src/BGRSclient.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/BGRSclient/src/BGRSclient.cpp.i
+.PHONY : BGRSclient/src/BGRSclient.cpp.i
 
-Boost_Echo_Client/src/Task.s: Boost_Echo_Client/src/Task.cpp.s
+BGRSclient/src/BGRSclient.s: BGRSclient/src/BGRSclient.cpp.s
 
-.PHONY : Boost_Echo_Client/src/Task.s
+.PHONY : BGRSclient/src/BGRSclient.s
 
 # target to generate assembly for a file
-Boost_Echo_Client/src/Task.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/Task.cpp.s
-.PHONY : Boost_Echo_Client/src/Task.cpp.s
+BGRSclient/src/BGRSclient.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/BGRSclient/src/BGRSclient.cpp.s
+.PHONY : BGRSclient/src/BGRSclient.cpp.s
 
-Boost_Echo_Client/src/connectionHandler.o: Boost_Echo_Client/src/connectionHandler.cpp.o
+BGRSclient/src/EncoderDecoder.o: BGRSclient/src/EncoderDecoder.cpp.o
 
-.PHONY : Boost_Echo_Client/src/connectionHandler.o
+.PHONY : BGRSclient/src/EncoderDecoder.o
 
 # target to build an object file
-Boost_Echo_Client/src/connectionHandler.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/connectionHandler.cpp.o
-.PHONY : Boost_Echo_Client/src/connectionHandler.cpp.o
+BGRSclient/src/EncoderDecoder.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/BGRSclient/src/EncoderDecoder.cpp.o
+.PHONY : BGRSclient/src/EncoderDecoder.cpp.o
 
-Boost_Echo_Client/src/connectionHandler.i: Boost_Echo_Client/src/connectionHandler.cpp.i
+BGRSclient/src/EncoderDecoder.i: BGRSclient/src/EncoderDecoder.cpp.i
 
-.PHONY : Boost_Echo_Client/src/connectionHandler.i
+.PHONY : BGRSclient/src/EncoderDecoder.i
 
 # target to preprocess a source file
-Boost_Echo_Client/src/connectionHandler.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/connectionHandler.cpp.i
-.PHONY : Boost_Echo_Client/src/connectionHandler.cpp.i
+BGRSclient/src/EncoderDecoder.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/BGRSclient/src/EncoderDecoder.cpp.i
+.PHONY : BGRSclient/src/EncoderDecoder.cpp.i
 
-Boost_Echo_Client/src/connectionHandler.s: Boost_Echo_Client/src/connectionHandler.cpp.s
+BGRSclient/src/EncoderDecoder.s: BGRSclient/src/EncoderDecoder.cpp.s
 
-.PHONY : Boost_Echo_Client/src/connectionHandler.s
+.PHONY : BGRSclient/src/EncoderDecoder.s
 
 # target to generate assembly for a file
-Boost_Echo_Client/src/connectionHandler.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/connectionHandler.cpp.s
-.PHONY : Boost_Echo_Client/src/connectionHandler.cpp.s
+BGRSclient/src/EncoderDecoder.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/BGRSclient/src/EncoderDecoder.cpp.s
+.PHONY : BGRSclient/src/EncoderDecoder.cpp.s
 
-Boost_Echo_Client/src/echoClient.o: Boost_Echo_Client/src/echoClient.cpp.o
+BGRSclient/src/Task.o: BGRSclient/src/Task.cpp.o
 
-.PHONY : Boost_Echo_Client/src/echoClient.o
+.PHONY : BGRSclient/src/Task.o
 
 # target to build an object file
-Boost_Echo_Client/src/echoClient.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/echoClient.cpp.o
-.PHONY : Boost_Echo_Client/src/echoClient.cpp.o
+BGRSclient/src/Task.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/BGRSclient/src/Task.cpp.o
+.PHONY : BGRSclient/src/Task.cpp.o
 
-Boost_Echo_Client/src/echoClient.i: Boost_Echo_Client/src/echoClient.cpp.i
+BGRSclient/src/Task.i: BGRSclient/src/Task.cpp.i
 
-.PHONY : Boost_Echo_Client/src/echoClient.i
+.PHONY : BGRSclient/src/Task.i
 
 # target to preprocess a source file
-Boost_Echo_Client/src/echoClient.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/echoClient.cpp.i
-.PHONY : Boost_Echo_Client/src/echoClient.cpp.i
+BGRSclient/src/Task.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/BGRSclient/src/Task.cpp.i
+.PHONY : BGRSclient/src/Task.cpp.i
 
-Boost_Echo_Client/src/echoClient.s: Boost_Echo_Client/src/echoClient.cpp.s
+BGRSclient/src/Task.s: BGRSclient/src/Task.cpp.s
 
-.PHONY : Boost_Echo_Client/src/echoClient.s
+.PHONY : BGRSclient/src/Task.s
 
 # target to generate assembly for a file
-Boost_Echo_Client/src/echoClient.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/Boost_Echo_Client/src/echoClient.cpp.s
-.PHONY : Boost_Echo_Client/src/echoClient.cpp.s
+BGRSclient/src/Task.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/BGRSclient/src/Task.cpp.s
+.PHONY : BGRSclient/src/Task.cpp.s
+
+BGRSclient/src/connectionHandler.o: BGRSclient/src/connectionHandler.cpp.o
+
+.PHONY : BGRSclient/src/connectionHandler.o
+
+# target to build an object file
+BGRSclient/src/connectionHandler.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/BGRSclient/src/connectionHandler.cpp.o
+.PHONY : BGRSclient/src/connectionHandler.cpp.o
+
+BGRSclient/src/connectionHandler.i: BGRSclient/src/connectionHandler.cpp.i
+
+.PHONY : BGRSclient/src/connectionHandler.i
+
+# target to preprocess a source file
+BGRSclient/src/connectionHandler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/BGRSclient/src/connectionHandler.cpp.i
+.PHONY : BGRSclient/src/connectionHandler.cpp.i
+
+BGRSclient/src/connectionHandler.s: BGRSclient/src/connectionHandler.cpp.s
+
+.PHONY : BGRSclient/src/connectionHandler.s
+
+# target to generate assembly for a file
+BGRSclient/src/connectionHandler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CoursesRegistration.dir/build.make CMakeFiles/CoursesRegistration.dir/BGRSclient/src/connectionHandler.cpp.s
+.PHONY : BGRSclient/src/connectionHandler.cpp.s
 
 # Help Target
 help:
@@ -260,18 +260,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... CoursesRegistration"
-	@echo "... Boost_Echo_Client/src/EncoderDecoder.o"
-	@echo "... Boost_Echo_Client/src/EncoderDecoder.i"
-	@echo "... Boost_Echo_Client/src/EncoderDecoder.s"
-	@echo "... Boost_Echo_Client/src/Task.o"
-	@echo "... Boost_Echo_Client/src/Task.i"
-	@echo "... Boost_Echo_Client/src/Task.s"
-	@echo "... Boost_Echo_Client/src/connectionHandler.o"
-	@echo "... Boost_Echo_Client/src/connectionHandler.i"
-	@echo "... Boost_Echo_Client/src/connectionHandler.s"
-	@echo "... Boost_Echo_Client/src/echoClient.o"
-	@echo "... Boost_Echo_Client/src/echoClient.i"
-	@echo "... Boost_Echo_Client/src/echoClient.s"
+	@echo "... BGRSclient/src/BGRSclient.o"
+	@echo "... BGRSclient/src/BGRSclient.i"
+	@echo "... BGRSclient/src/BGRSclient.s"
+	@echo "... BGRSclient/src/EncoderDecoder.o"
+	@echo "... BGRSclient/src/EncoderDecoder.i"
+	@echo "... BGRSclient/src/EncoderDecoder.s"
+	@echo "... BGRSclient/src/Task.o"
+	@echo "... BGRSclient/src/Task.i"
+	@echo "... BGRSclient/src/Task.s"
+	@echo "... BGRSclient/src/connectionHandler.o"
+	@echo "... BGRSclient/src/connectionHandler.i"
+	@echo "... BGRSclient/src/connectionHandler.s"
 .PHONY : help
 
 
